@@ -1,0 +1,64 @@
+<script>
+
+  "use strict";
+
+  // Variável para controlar a exibição de janelas modais de mensagens
+  let conteudoModalMensagem;
+  let modalMensagem;
+
+  // Variáveis para controlar a exibição da janela modal de erro
+  let conteudoModalErro;  
+  let modalErro;
+
+
+  /**
+  * Função que inicializa as telas modais utilizadas no frontend
+  */  
+  function inicializarModais() {
+
+    // Instancia as variáveis para controlar a exibição da janela modal de mensagem
+    conteudoModalMensagem = document.getElementById("conteudoModalMensagem");
+    modalMensagem = new bootstrap.Modal( document.getElementById("modalMensagem" ), {
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    // Instancia as variáveis para controlar a exibição da janela modal de erro
+    conteudoModalErro = document.getElementById("conteudoModalErro");  
+    modalErro = new bootstrap.Modal( document.getElementById("modalErro") );
+
+  } // Fim da função inicializarModais
+
+  
+  /**
+   * Função frontend que mostra o modal de mensagem
+   *  
+   * @param {String} mensagem: A mensagem que será mostrada no modal de mensagem 
+   */  
+  function mostrarModalMensagem( mensagem ) {
+
+    // Mostra modal de mensagem
+    conteudoModalMensagem.textContent = mensagem;
+    modalMensagem.show();
+
+  } // Fim da função modalErro
+
+  
+  /**
+   * Função frontend que mostra o modal de erro
+   *  
+   * @param {String} mensagemErro: A mensagem que será mostrada no modal de erro 
+   */  
+  function mostrarModalErro( mensagemErro ) {
+
+    // Esconde modal de mensagem, caso alguma esteja visível
+    modalMensagem.hide();
+
+    // Mostra modal de erro
+    conteudoModalErro.textContent = mensagemErro;
+    modalErro.show();
+
+  } // Fim da função modalErro
+
+
+</script>

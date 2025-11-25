@@ -1,0 +1,59 @@
+<script>
+
+  "use strict";
+
+  /**
+   * Função front end que chama a função back end pesquisaCidadaoBE para pesquisar um cidadão,
+   * pelo CPF, na base do CADUNICO
+   *  
+   * @param {String} cpfCidadao: O CPF do cidadão
+   * 
+   * @return {Objetc} Um objeto com os dados do cidadão, caso ele seja localizado 
+   *                  na base do CAD ÚNICO. ou o booleano false, se não localizado
+   */  
+  function pesquisaCidadaoFE( cpfCidadao ) {
+
+      google.script.run
+                   .withSuccessHandler( retorno => {
+
+                     console.log( "Retorno Pesquisa: " + retorno.nome );
+               
+                     // Se localizado, mostra os campos do cadastro do benefíciário
+                     if( retorno != false ) {
+                 
+                       document.getElementById( "navSuperior" ).style.display = "";
+                       document.getElementById( "navInferior" ).style.display = "";
+                   
+                       document.getElementById( "dadosCadUnico" ).style.display = "";
+                       document.getElementById( "dadosEncaminhamento" ).style.display = "";
+                       document.getElementById( "dadosBeneficiario" ).style.display = "";
+
+                       exibeCidadao( retorno );
+
+                       // Esconde modal de mensagem
+                       modalMensagem.hide();   
+                 
+                     // Se não localizado, mostra a mensagem para carregar a folha resumo
+                     } else {
+                 
+                       document.getElementById( "mensagemCadUnicoNaoLocalizado" ).style.display = "";  
+                       
+                       // Esconde modal de mensagem
+                       modalMensagem.hide();   
+
+                     }                     
+  
+                   })
+                   .withFailureHandler( erro => {                     
+
+                     // mostra modal de erro
+                     mostrarModalErro( "pesquisaCidadaoFE - " + erro.message );
+                     
+                   })
+                   // Chama a função backend para pesquisar por um cidadão na base do CAD ÚNICO
+                   .pesquisaCidadaoBE( cpfCidadao );
+    
+  }
+
+
+</script>

@@ -1,0 +1,329 @@
+<script>
+
+  "use strict";
+
+  /**
+   * Variável para controlar o número de familiares do beneficiário
+  */
+  let numeroDeFamiliares;
+
+
+
+  /**
+   * Função que configura a página do bolsa moradia
+   */
+  function configurarPaginaBolsaMoradia() {
+
+    // Esconde, inicialmente, os campos da página,
+    // que só devem ser mostrados após a pesquisa
+    document.getElementById( "navSuperior" ).style.display = "none";
+    document.getElementById( "navInferior" ).style.display = "none";
+
+    document.getElementById( "mensagemCadUnicoNaoLocalizado" ).style.display = "none";      
+    
+    document.getElementById( "dadosCadUnico" ).style.display = "none";
+    document.getElementById( "dadosEncaminhamento" ).style.display = "none";
+    document.getElementById( "dadosBeneficiario" ).style.display = "none";
+    document.getElementById( "dadosFamilia" ).style.display = "none";
+
+    // Reset no número de familiares
+    numeroDeFamiliares = 0;
+
+  } // Fim da função configurarPaginaBolsaMoradia
+
+
+
+  /**
+   * Handler para tratar o evento de click no botão pesquisa Cidadao
+   */
+  function handlerBotaoPesquisaCidadao() {
+
+    // Reseta configuração da pagina Bolsa Moradia
+    configurarPaginaBolsaMoradia();
+
+    // Leitura do campo CPF
+    let cpf = document.getElementById( "cpfInput" ).value;
+
+    // Validação do CPF informado
+    let cpfValidado = validarCPF( cpf );
+
+    // Se CPF válido, o pesquisa na base do Cad Único
+    if( cpfValidado != false ) {    
+
+      // Mostra modal com mensagem de pesquisa pelo beneficiário
+      mostrarModalMensagem( "Pesquisando beneficiário, por favor aguarde..." );                              
+
+      // Pesquisa pelo CPF na base do Cad Único
+      pesquisaCidadaoFE( cpfValidado );
+
+    } // Fim da validação de RF           
+
+  } // Fim da função handlerBotaoPesquisaCidadao
+
+
+
+  /**
+   * Função para validar o CPF informado pelo usuário
+   */
+  function validarCPF( cpf ) {
+    
+    // Testa se o CPF foi informado
+    if( cpf == "" ) {   
+      mostrarModalErro( "Campo CPF é obrigatório!" );
+      return false;
+    } 
+
+    // Testa se foram informados os onze dígitos do CPF
+    let caracteresCPF = cpf.split("");    
+    let numDigitos = 0;
+
+    let cpfProcessado = [];
+    let digito;
+
+    caracteresCPF.forEach( item => {
+
+      digito = parseInt(item);
+      if( !isNaN( digito ) ) {
+        ++numDigitos;
+        cpfProcessado.push( digito );
+      }
+    });
+
+    if( numDigitos == 11 ) {
+      return cpfProcessado.join("");
+    } else {
+      mostrarModalErro( "CPF inválido!" );      
+      return false;
+    }
+
+  } // Fim da função validarCPF
+
+
+
+  /**
+   * Função para adicionar um familiar
+   */
+  function adicionarFamiliar() {
+    
+    // Incrementa o número de familiares do cidadão
+    ++numeroDeFamiliares;
+
+    // Mostra os campos dos familiares, se houver pelo menos 1 familiar
+    if( numeroDeFamiliares == 1 ) {
+      document.getElementById( "dadosFamilia" ).style.display = "";    
+    }
+    
+    // Campos referentes a um familiar
+    let familiar = `
+
+        <!-- Familiar ${numeroDeFamiliares} - Início -->
+        <div class="mb-5" id="familiar_${numeroDeFamiliares}">
+          <div class="row mb-1">       
+            <div class="col-md-4">
+              <label for="nomeFamiliarInput_${numeroDeFamiliares}" class="form-label fw-bold">NOME COMPLETO</label>
+            </div>              
+            <div class="col-md-2">
+              <label for="dataNascimentoFamiliarInput_${numeroDeFamiliares}" class="form-label fw-bold">DATA DE NASCIMENTO</label>
+            </div>            
+            <div class="col-md-2">
+              <label for="parentescoFamiliarInput_${numeroDeFamiliares}" class="form-label fw-bold">PARENTESCO</label>
+            </div>                                                                          
+            <div class="col-md-3">
+              <label for="problemasSaudeFamiliarSelect_${numeroDeFamiliares}" class="form-label fw-bold">PROBLEMAS DE SAÚDE</label>
+            </div>                
+            <div class="col-md-1"></div>        
+          </div>    
+      
+          <div class="row mb-5">            
+            <div class="col-md-4">
+              <input type="text" class="form-control" id="nomeFamiliarInput_${numeroDeFamiliares}">
+            </div>              
+            <div class="col-md-2">
+              <input type="date" class="form-control" id="dataNascimentoFamiliarInput_${numeroDeFamiliares}">
+            </div>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="parentescoFamiliarInput_${numeroDeFamiliares}">
+            </div>                          
+            <div class="col-md-3">          
+              <select class="form-select" id="problemasSaudeFamiliarSelect_${numeroDeFamiliares}">
+                <?!= gerarSelect( BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE ); ?>
+              </select>
+            </div>   
+            <button type="button" class="btn btn-secondary col-md-1" onclick="removerFamiliar('familiar_${numeroDeFamiliares}')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+              </svg>
+            </button>                                  
+          </div>                  
+
+
+          <div class="row mb-1">       
+            <div class="col-md-2">
+              <label for="racaCorFamiliarSelect_${numeroDeFamiliares}" class="form-label fw-bold">RAÇA/COR</label>
+            </div>              
+            <div class="col-md-2">
+              <label for="generoFamiliarSelect_${numeroDeFamiliares}" class="form-label fw-bold">GÊNERO</label>
+            </div>            
+            <div class="col-md-2">
+              <label for="orientacaoSexualFamiliarInput_${numeroDeFamiliares}" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
+            </div>                                                                          
+            <div class="col-md-2">
+              <label for="pcdFamiliarSelect_${numeroDeFamiliares}" class="form-label fw-bold">PCD?</label>
+            </div>                
+            <div class="col-md-4"></div>        
+          </div>    
+      
+          <div class="row mb-4">            
+            <div class="col-md-2">
+              <select class="form-select" id="racaCorFamiliarSelect_${numeroDeFamiliares}">
+                <?!= gerarSelect( BUFFER_RACAS_CORES ); ?>
+              </select>
+            </div>                          
+            <div class="col-md-2">
+              <select class="form-select" id="generoFamiliarSelect_${numeroDeFamiliares}">
+                <?!= gerarSelect( BUFFER_IDENTIDADES_DE_GENERO ); ?>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select class="form-select" id="orientacaoSexualFamiliarInput_${numeroDeFamiliares}">
+                <?!= gerarSelect( BUFFER_ORIENTACOES_SEXUAIS ); ?>
+              </select>
+            </div>   
+            <div class="col-md-2">
+              <select class="form-select" id="pcdFamiliarSelect_${numeroDeFamiliares}">
+                <?!= gerarSelect( BUFFER_RESPOSTAS_SIMPLES ); ?>
+              </select>
+            </div>   
+            <div class="col-md-4"></div>        
+          </div>    
+
+          <br><hr>
+
+        </div>        
+        <!-- Familiar - Fim -->    
+
+    `;
+
+    // Adiciona uma linha com campos referentes a um familiar
+    document.getElementById("familiares").innerHTML += familiar;
+
+  } // Fim da função adicionarFamiliar
+
+
+  
+  /**
+   * Função para remover um familiar
+   */
+  function removerFamiliar( id ) {
+   
+    // Obtém o elemento pelo ID
+    let elemento = document.getElementById( id );
+
+    // Remove o elemento contendo os campos do familiar
+    elemento.remove();
+
+    // Decrementa o número de familiares do cidadão
+    --numeroDeFamiliares;      
+  
+    // Esconde os campos dos familiares, se não houver mais familiares na lista
+    if( numeroDeFamiliares == 0 ) {
+      document.getElementById( "dadosFamilia" ).style.display = "none";    
+    }
+
+  } // Fim da função removerFamiliar
+
+
+
+  /**
+   * Função para mostrar os campos referentes às opções
+   * selecionadas no checkbox tipoTrabalhoCheckbox
+   */
+  function mostrarCamposTrabalho() {
+    
+    // Reset nos displays dos campos
+    document.getElementById( "docTrabalhoFormal" ).style.display = "none";
+    document.getElementById( "descricaoTrabalhoInformal" ).style.display = "none";
+    
+    // Ids dos tipos de trabalhos selecionados no checkbox tipoTrabalhoCheckbox      
+    const tipoTrabalhoCheckbox = document.querySelectorAll('input[name="tipoTrabalhoCheckbox"]:checked');
+    const arrayIdsTipoTrabalho = Array.from(tipoTrabalhoCheckbox).map(chk => chk.value);
+
+    // Se algum checkbox dos tipos de trabalhos tiver sido selecionado
+    if( arrayIdsTipoTrabalho.length ) {
+
+      arrayIdsTipoTrabalho.forEach( item => {
+        
+        if(item == "3") document.getElementById( "docTrabalhoFormal" ).style.display = "";
+        if(item == "4") document.getElementById( "descricaoTrabalhoInformal" ).style.display = "";
+
+      }); 
+    }
+
+  } // Fim da função mostrarCamposTrabalho
+
+
+
+  /**
+   * Função para mostrar o campo referente à opção
+   * selecionada no checkbox estamosJuntosCheckbox
+   */
+  function mostrarCampoEstamosJuntos() {
+    
+    // Reset nos displays dos campos
+    document.getElementById( "docEstamosJuntos" ).style.display = "none";    
+    
+    // Ids dos tipos de trabalhos selecionados no checkbox tipoTrabalhoCheckbox      
+    const estamosJuntosCheckbox = document.querySelectorAll('input[name="estamosJuntosCheckbox"]:checked');
+    const arrayIdsEstamosJuntos = Array.from(estamosJuntosCheckbox).map(chk => chk.value);
+
+    // Se algum checkbox dos tipos de trabalhos tiver sido selecionado
+    if( arrayIdsEstamosJuntos.length ) {
+
+      arrayIdsEstamosJuntos.forEach( item => {
+        
+        if(item != "1") document.getElementById( "docEstamosJuntos" ).style.display = "";        
+
+      }); 
+    }
+
+  } // Fim da função mostrarCampoEstamosJuntos
+
+
+
+  /**
+   * Função para mostrar os campos referentes às opções
+   * selecionadas no checkbox violenciasFamiliaresCheckbox
+   */
+  function mostrarCamposViolenciasFamiliares() {
+    
+    // Reset nos displays dos campos
+    document.getElementById( "descricaoViolenciasFamiliares" ).style.display = "none";
+        
+    // Ids dos tipos de trabalhos selecionados no checkbox violenciasFamiliaresCheckbox      
+    const violenciasFamiliaresCheckbox = document.querySelectorAll('input[name="violenciasFamiliaresCheckbox"]:checked');
+    const arrayIdsViolenciasFamiliares = Array.from(violenciasFamiliaresCheckbox).map(chk => chk.value);
+
+    // Se algum checkbox dos tipos de trabalhos tiver sido selecionado
+    if( arrayIdsViolenciasFamiliares.length ) {
+
+      arrayIdsViolenciasFamiliares.forEach( item => {
+        
+        if(item != "1") document.getElementById( "descricaoViolenciasFamiliares" ).style.display = "";        
+
+      }); 
+    }
+
+  } // Fim da função mostrarCamposTrabalho
+
+
+</script>
+
+
+
+
+
+
+
+
+  

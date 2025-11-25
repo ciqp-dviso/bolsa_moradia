@@ -1,0 +1,29 @@
+<script>
+
+  "use strict";
+  
+
+  /**
+   * Inicializa os sistema ao carregar a página index.html
+   */
+  document.addEventListener( 'DOMContentLoaded', () => {
+
+    // Inicializa as telas modais
+    inicializarModais();       
+                   
+    // Pŕe carrega as páginas do sistema no cache de páginas
+    preCarregarPaginas();                       
+
+    // Mostra modal com mensagem de inicialização do sistema
+    mostrarModalMensagem( "Inicializando o sistema, por favor aguarde..." );                    
+
+    // Aguarda os caches serem inicializados e em seguida chama 
+    // a função que redireciona para a tela com os resumos dos casos    
+    //setTimeout( function() { carregarPagina( "paginaBolsaMoradia" ); }, 10000 );  
+    carregarPagina( "paginaBolsaMoradia" );
+    
+
+  }); // Fim do document.addEventListener
+
+
+</script>

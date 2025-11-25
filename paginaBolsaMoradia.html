@@ -1,0 +1,461 @@
+<!-- Página Bolsa Moradia - Início -->
+
+
+  <!-- Nav - Botões Superiores Gravar Encaminhamento - Início -->
+  <nav class="navbar bg-body-tertiary mt-1" id="navSuperior">
+    <div class="container-fluid justify-content-start">
+      <button id="botaoGravarEncaminhamentoSuperior" class="btn btn-sm btn-outline-secondary me-4" type="button">GRAVAR ENCAMINHAMENTO</button>      
+    </div>
+  </nav>
+  <!-- Nav - Botões Superiores Gravar Encaminhamento - Fim -->
+
+
+
+
+  <!-- Main - Parte principal da página Bolsa Moradia - Início -->
+  <main id="paginaBolsaMoradia" class="container">     
+
+    <!-- Cabeçalho -->
+    <section class="row">
+      <h3 class="text-center mt-4 mb-4" id="tituloPagina">BOLSA MORADIA - FORMULÁRIO DE ENCAMINHAMENTO</h3>    
+    </section>
+
+    <br><br>          
+
+    <!-- CPF -->
+    <section class="row">  
+      <div class="col-md-4 mb-3">
+        <label for="cpfInput" class="form-label fw-bold">PESQUISA CIDADÃO</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="cpfInput" placeholder="Digite o CPF">        
+          <button type="button" class="btn btn-primary" id="cpfButton" onclick="handlerBotaoPesquisaCidadao()">Pesquisar</button> 
+        </div>
+      </div>
+    </section>  
+
+    
+    
+    <section id="mensagemCadUnicoNaoLocalizado">    
+
+      <br><hr><br>
+
+      <div class="row mb-4">
+        A pessoa pesquisada ou não foi localizada na base do CADÚNICO de Setembro/25 ou foi localizada, porém
+        possuem em seu registro informações que descumprem os critérios de elegibilidade. Nesse caso é recomendado que seja
+        realizada consulta ao CADÚNICO e verificado:<br/>
+        1) O cadastro é da cidade de Belo Horizonte;<br/>
+        2) O cadastro tem menos de 2 anos da última atualização; <br/>
+        3) Consta no cadastro que essa pessoa está em situação de rua <br />
+        Atendidos todos os critérios acima, emita a folha resumo e faça o upload no botão abaixo, para continuar o preenchimento
+        do formulário.
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">          
+          <input class="form-control" type="file" id="uploadFolhaResumolButton">
+        </div>
+      </div>                                 
+        
+    </section>
+        
+    
+    <!-- Dados do CAD Único - Parte 1 -->
+    <section  id="dadosCadUnico"> 
+
+      <br><hr><br>
+
+      <div class="row mb-1">            
+        <div class="col-md-4">
+          <label for="dataAtualizacaoCADUnicoInput" class="form-label fw-bold">DATA ATUALIZAÇÃO CADÚNICO</label>
+        </div>
+  
+        <div class="col-md-4">
+          <label for="tempoResidenciaBHSelect" class="form-label fw-bold">TEMPO DE RESIDÊNCIA EM BH</label>
+        </div>
+  
+        <div class="col-md-4">
+          <label for="tempoSituacaoRuaSelect" class="form-label fw-bold">TEMPO EM SITUAÇÃO DE RUA</label>
+        </div>
+      </div>    
+  
+      <div class="row  mb-4">            
+        <div class="col-md-2">
+          <input type="date" class="form-control" id="dataAtualizacaoCADUnicoInput">
+        </div>                                                  
+        <div class="col-md-2"></div>
+  
+        <div class="col-md-3">          
+          <select class="form-select" id="tempoResidenciaBHSelect">
+            <?!= gerarSelect( BUFFER_TEMPO_EM_QUE_VIVE_NA_CIDADE ); ?>
+          </select>          
+        </div>                      
+        <div class="col-md-1"></div>                                        
+  
+        <div class="col-md-3">
+          <select class="form-select" id="tempoSituacaoRuaSelect">
+            <?!= gerarSelect( BUFFER_TEMPO_EM_SITUACAO_DE_RUA ); ?>
+          </select>          
+        </div>                                                              
+        <div class="col-md-1"></div>
+      </div>  
+
+      <div class="row mb-1">  
+        <div class="col-md-3">
+          <label for="rendaIdentificadaInput" class="form-label fw-bold">RENDA IDENTIFICADA</label>
+        </div>          
+        <div class="col-md-5"></div>
+        <div class="col-md-4">
+          <label for="numeroDeFamiliaresInput" class="form-label fw-bold">QUANTIDADE DE MEMBROS NA FAMÍLIA</label>
+        </div>                  
+      </div>
+
+      <div class="row mb-4">  
+        <div class="col-md-2">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">R$</span>
+            <input type="text" class="form-control" id="rendaIdentificadaInput" aria-describedby="basic-addon1">
+            <span class="input-group-text">,00</span>
+          </div>
+        </div>          
+        <div class="col-md-6"></div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="numeroDeFamiliaresInput">
+        </div>                          
+      </div>
+
+      <div class="row mb-6">
+        <p class="fw-bold">FONTE(S) DE RENDA</p>
+        <div id="fonteRendaCheckbox">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_FONTES_DE_RENDA, "fonteRendaCheckbox", 0 ); ?>
+        </div>    
+      </div>                           
+
+    </section>     
+          
+    
+    <!-- Dados do encaminhamento -->
+    <section  id="dadosEncaminhamento">
+
+      <br><hr><br>
+
+      <div class="row mb-1">            
+        <div class="col-md-10">
+          <b>A pessoa encaminhada apresenta condições mínimas de autonomia para administração do benefício e da moradia?</b>
+        </div>      
+      </div>    
+      <div class="row mb-5">            
+        <div class="col-md-2">
+          <input class="form-check-input me-1" type="checkbox" value="1" id="checkboxCondicoesMinimas">
+          <label class="form-check-label" for="checkboxCondicoesMinimas">Afirmo que sim</label>        
+        </div>      
+      </div>          
+
+      <div class="row mb-1">       
+        <div class="col-md-4">
+          <label for="orgaoEncaminhadorSelect" class="form-label fw-bold">ÓRGÃO ENCAMINHADOR</label>
+        </div>
+        <div class="col-md-4">
+          <label for="nomeTecnicoInput" class="form-label fw-bold">NOME DO TÉCNICO RESPONÁVEL PELO ENCAMINHAMENTO</label>
+        </div>              
+        <div class="col-md-4">
+          <label for="emailTecnicoInput" class="form-label fw-bold">E-MAIL DO TÉCNICO RESPONÁVEL PELO ENCAMINHAMENTO</label>
+        </div>                                                              
+      </div>    
+  
+      <div class="row mb-4">            
+        <div class="col-md-4">          
+          <select class="form-select" id="orgaoEncaminhadorSelect">
+            <?!= gerarSelect( BUFFER_ORGAOS_ENCAMINHADORES ); ?>
+          </select>
+        </div>             
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="nomeTecnicoInput">
+        </div>              
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="emailTecnicoInput">
+        </div>              
+      </div>        
+      
+    </section>
+              
+
+    <!-- Dados do beneficiário -->
+    <section  id="dadosBeneficiario">
+
+      <br><hr><br>
+
+      <div class="row mt-4 mb-4">
+        <h4 class="text-center" id="tituloDadosBeneficiario">PESSOA BENEFICIÁRIA</h4>    
+      </div>             
+
+      <!-- Linha 1 - dados beneficiário -->
+      <div class="row mb-1">       
+        <div class="col-md-6">
+          <label for="nomeBeneficiarioInput" class="form-label fw-bold">NOME COMPLETO</label>
+        </div>              
+        <div class="col-md-6">
+          <label for="nomeSocialBeneficiarioInput" class="form-label fw-bold">NOME SOCIAL</label>
+        </div>                        
+      </div>    
+  
+      <div class="row mb-4">            
+        <div class="col-md-5">
+          <input type="text" class="form-control" id="nomeBeneficiarioInput">
+        </div>              
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <input type="text" class="form-control" id="nomeSocialBeneficiarioInput">
+        </div>              
+        <div class="col-md-1"></div>
+      </div>       
+
+
+      <!-- Linha 2 - dados beneficiário -->       
+      <div class="row mb-1">       
+        <div class="col-md-4">
+          <label for="dataNascimentoInput" class="form-label fw-bold">DATA DE NASCIMENTO</label>
+        </div>              
+        <div class="col-md-4">
+          <label for="racaCorSelect" class="form-label fw-bold">RAÇA/COR</label>
+        </div>                
+        <div class="col-md-4">
+          <label for="escolaridadeSelect" class="form-label fw-bold">ESCOLARIDADE</label>          
+        </div>                                              
+      </div>    
+  
+      <div class="row mb-4">            
+        <div class="col-md-2">
+          <input type="date" class="form-control" id="dataNascimentoInput">
+        </div>              
+        <div class="col-md-2"></div>
+
+        <div class="col-md-2">
+          <select class="form-select" id="racaCorSelect">
+            <?!= gerarSelect( BUFFER_RACAS_CORES ); ?>
+          </select>
+        </div>              
+        <div class="col-md-2"></div>
+
+        <div class="col-md-3">
+          <select class="form-select" id="escolaridadeSelect">
+            <?!= gerarSelect( BUFFER_ESCOLARIDADE ); ?>
+          </select>
+        </div>                      
+        <div class="col-md-1"></div>
+      </div>             
+
+
+      <!-- Linha 3 - dados beneficiário -->       
+      <div class="row mb-1">       
+        <div class="col-md-4">
+          <label for="generoBeneficiarioSelect" class="form-label fw-bold">GÊNERO AUTODECLARADO</label>
+        </div>              
+        <div class="col-md-4">
+          <label for="orientacaoSexualBeneficiarioSelect" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
+        </div>                
+        <div class="col-md-4"></div>                                              
+      </div>    
+  
+      <div class="row mb-4">            
+        <div class="col-md-2">
+          <select class="form-select" id="generoBeneficiarioSelect">
+            <?!= gerarSelect( BUFFER_IDENTIDADES_DE_GENERO ); ?>
+          </select>
+        </div>              
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+          <select class="form-select" id="orientacaoSexualBeneficiarioSelect">
+            <?!= gerarSelect( BUFFER_ORIENTACOES_SEXUAIS ); ?>
+          </select>
+        </div>              
+        <div class="col-md-6"></div>
+      </div>
+      
+      
+      <!-- Linha 4 - dados beneficiário -->             
+      <div class="row mb-4">
+        <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA ESTÁ VINCULADO(A) AO TRABALHO FORMAL, GRUPOS PRODUTIVOS, ASSOCIAÇÕES E COOPERATIVAS?</p>
+        <div id="tipoTrabalhoCheckbox" onchange="mostrarCamposTrabalho()">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_TIPOS_DE_TRABALHO, "tipoTrabalhoCheckbox", 0 ); ?>
+        </div>    
+      </div>                     
+      
+      <div class="mb-4" id="docTrabalhoFormal" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-6">
+            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O TRABALHO FORMAL</p>           
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">            
+            <input class="form-control" type="file" id="uploadDocTrabalhoFormalButton">
+          </div>
+        </div>
+      </div>                           
+
+      <div class="row mb-4" id="descricaoTrabalhoInformal" style="display: none;">
+        <div class="col-md-10">
+          <label for="descricaoTrabalhoInformalTextArea" class="form-label fw-bold mb-1">CASO O(A) BENEFICIÁRIO/BENEFICIÁRIA EXERÇA TRABALHO INFORMAL, FAÇA UMA BREVE DESCRIÇÃO</label>
+          <textarea class="form-control" id="descricaoTrabalhoInformalTextArea" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
+        </div>        
+      </div>   
+
+      
+      <!-- Linha 5 - dados beneficiário -->             
+      <div class="row mb-4">
+        <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA É PARTICIPANTE DO PROGRAMA ESTAMOS JUNTOS, SEJA INSERIDO NAS FRENTES DE TRABALHO OU OPORTUNIDADE CLT?</p>
+        <div id="estamosJuntosCheckbox" onchange="mostrarCampoEstamosJuntos()">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_RESPOSTAS_SIMPLES, "estamosJuntosCheckbox", 0 ); ?>
+        </div>    
+      </div>            
+      
+      <div class="mb-4" id="docEstamosJuntos" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-12">
+            <p class="fw-bold">INSIRA A DECLARAÇÃO DA SUTE (Subsecretaria de Trabalho e Emprego) SOBRE A PARTICIPAÇÃO NO PROGRAMA ESTAMOS JUNTOS</p>           
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">            
+            <input class="form-control" type="file" id="uploadDocEstamosJuntosButton">
+          </div>
+        </div>
+      </div>                           
+
+                        
+      <!-- Linha 6 - dados beneficiário -->             
+      <div class="row mb-4">
+        <p class="fw-bold">A PESSOA CANDIDATA TEM HISTÓRICO DE INSTITUCIONALIZAÇÃO?</p>
+        <div id="institucionalizacaoCheckbox">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_HISTORICO_INSTITUCIONALIZACAO, "institucionalizacaoCheckbox", 0 ); ?>
+        </div>    
+      </div>      
+
+
+      <!-- Linha 7 - dados beneficiário -->             
+      <div class="row mb-4">
+        <p class="fw-bold">A PESSOA CANDIDATA AO BENEFÍCIO POSSUI ALGUMA DAS CONDIÇÕES DE SAÚDE LISTADAS ABAIXO?</p>
+        <div id="saudeBeneficiario">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_CONDICOES_SAUDE, "saudeBeneficiarioCheckbox", 0 ); ?>
+        </div>    
+      </div>      
+
+
+      <!-- Linha 8 - dados beneficiário -->
+      <div class="row mb-4">
+        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, HÁ INDIVÍDUOS EM SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS?</p>
+        <div id="violenciasFamiliaresCheckbox" onchange="mostrarCamposViolenciasFamiliares()">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_VIOLENCIAS, "violenciasFamiliaresCheckbox", 0 ); ?>
+        </div>    
+      </div>    
+
+      <div class="row mb-4" id="descricaoViolenciasFamiliares" style="display: none;">
+        <div class="col-md-10">
+          <label for="descricaoViolenciasFamiliaresTextArea" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DA SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS</label>
+          <textarea class="form-control" id="descricaoViolenciasFamiliaresTextArea" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
+        </div>        
+      </div>   
+
+      <!-- Linha 9 - dados beneficiário -->
+      <div class="row mb-4">
+        <p class="fw-bold">O(A) BENEFICIÁRIO(A) OU ALGUÉM DA FAMÍLIA ESTÁ EM SITUAÇÃO DE PROSTITUIÇÃO?</p>
+        <div id="prostituicaoCheckbox">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_RESPOSTAS_SIMPLES, "prostituicaoCheckbox", 0 ); ?>
+        </div>    
+      </div>                       
+
+      <br><hr><br>
+
+      <!-- Adicionar Familiares -->
+      <div class="row mt-4">
+        <h4 class="text-center" id="tituloComposicaoFamiliar">COMPOSIÇÃO FAMILIAR</h4>    
+      </div>       
+
+      <div class="row mt-5 mb-5">  
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary" id="addFamiliarButton" onclick="adicionarFamiliar()">Adicionar Familiar</button> 
+        </div>
+        <div class="col-md-5"></div>
+      </div>              
+      
+    </section>    
+
+    
+    <!-- Dados família -->
+    <section  id="dadosFamilia">
+
+      <!-- Linha 2 - Dados Família (lista de familiares) -->
+      <div class="mb-5" id="familiares">
+
+      </div>
+
+      <!-- Dados Família (perfil dos familiares) -->      
+      <div class="row mb-5">
+        
+        <!-- Linha 1 - perfil outros familiares -->             
+        <div class="row mb-4">
+          <p class="fw-bold">SELECIONE AS SITUAÇÕES NAS QUAIS ALGUM OUTRO MEMBRO DA FAMÍLIA (EXCLUINDO O CANDIDATO/CANDIDATA) SE ENQUADRE:</p>
+          <div id="caracteristicasFamiliaresCheckbox">
+            <!-- 1: checkbox inline   -->
+            <!-- 0: checkbox vertical -->
+            <?!= gerarCheckBox( BUFFER_CARACTERISTICAS_OUTROS_CIDADAOS, "caracteristicasFamiliaresCheckbox", 0 ); ?>
+          </div>    
+        </div>      
+
+        <!-- Linha 2 - perfil outros familiares -->     
+        <div class="row mb-4">
+          <p class="fw-bold">ALGUM MEMBRO DA FAMÍLIA ESTÁ VINCULADO AO TRABALHO FORMAL, GRUPOS PRODUTIVOS, ASSOCIAÇÕES E COOPERATIVAS?</p>
+          <div id="tipoTrabalhoFamiliaresCheckbox">
+            <!-- 1: checkbox inline   -->
+            <!-- 0: checkbox vertical -->
+            <?!= gerarCheckBox( BUFFER_TIPOS_DE_TRABALHO, "tipoTrabalhoFamiliaresCheckbox", 0 ); ?>
+          </div>    
+        </div>    
+        
+        <!-- Linha 3 - perfil outros familiares -->     
+        <div class="row mb-3">
+          <p class="fw-bold">ALGUM MEMBRO DA FAMÍLIA É PARTICIPANTE DO PROGRAMA ESTAMOS JUNTOS, SEJA INSERIDO NAS FRENTES DE TRABALHO OU OPORTUNIDADE CLT?</p>
+          <div id="estamosJuntosFamiliaresCheckbox">
+            <!-- 1: checkbox inline   -->
+            <!-- 0: checkbox vertical -->
+            <?!= gerarCheckBox( BUFFER_RESPOSTAS_SIMPLES, "estamosJuntosFamiliaresCheckbox", 0 ); ?>
+          </div>    
+        </div>            
+
+      </div>       
+
+    </section>
+     
+
+  </main> 
+  <!-- Main - Parte principal da tela Edição de Caso - Fim -->
+
+
+  <!-- Nav - Botões Inferiores Gravar Encaminhamento - Início -->
+  <nav class="navbar bg-body-tertiary mt-2 mb-1" id="navInferior">
+    <div class="container-fluid justify-content-start">
+      <button id="botaoGravarEncaminhamentoInferior" class="btn btn-sm btn-outline-secondary me-4" type="button">GRAVAR ENCAMINHAMENTO</button>            
+    </div>
+  </nav>
+  <!-- Nav - Botões Inferiores Gravar Encaminhamento - Fim -->  
+
+
+<!-- Página Bolsa Moradia - Fim -->
+
+
+  
