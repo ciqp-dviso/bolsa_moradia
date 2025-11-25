@@ -25,7 +25,7 @@
  *     . HISTORICO_INSTITUCIONALIZACAO
  *     . ESCOLARIDADE
  */
-const PLANILHA_CODIGOS_ID  =  "1jf1vIfAjYxks0rkVr6KBSt8xrlRFqt_q57ldp2fCT3I";
+const PLANILHA_CODIGOS_ID  =  "1bK0qGzFC6ETLp9aWhsxK3MWmvwvKqUijXnATP1F8R30";
 const PLANILHA_CODIGOS     =  SpreadsheetApp.openById(PLANILHA_CODIGOS_ID);
 
 const TABELA_RESPOSTAS_SIMPLES                =  PLANILHA_CODIGOS.getSheetByName('RESPOSTAS_SIMPLES');
@@ -85,7 +85,7 @@ const NUM_ESCOLARIDADE                     =  BUFFER_ESCOLARIDADE.length;
 /**
  * Planilha CADUNICO
  */
-const PLANILHA_CADUNICO_ID        =  "1hI3gHo9eLbk1sCkarSD5lWFjwxFf83DThFaWNPNP3ak";
+const PLANILHA_CADUNICO_ID        =  "1NXhu3ZH6pz8zUMu4cbye-i5oEW8uT_gzCVQHXgu513g";
 const PLANILHA_CADUNICO           =  SpreadsheetApp.openById(PLANILHA_CADUNICO_ID);
 const TABELA_CADUNICO             =  PLANILHA_CADUNICO.getSheetByName('BASE_DADOS');
 let BUFFER_CADUNICO               =  TABELA_CADUNICO.getDataRange().getDisplayValues().splice(1);
@@ -96,7 +96,7 @@ const NUM_COLUNAS_TABELA_CADUNICO =  13;
 /**
  * Planilha CASOS
  */
-const PLANILHA_CASOS_ID        =  "18o5wcTGkF5kVEFMrDr_dmwEgQWqSXemBf0IuNc3tQNU";
+const PLANILHA_CASOS_ID        =  "1HlgS8mL542IhcNGzjnHj9OC_Z0ObXJ225OOV7HkARnI";
 const PLANILHA_CASOS           =  SpreadsheetApp.openById(PLANILHA_CASOS_ID);
 const TABELA_CASOS             =  PLANILHA_CASOS.getSheetByName('CASOS');
 let BUFFER_CASOS               =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
@@ -112,7 +112,7 @@ function refreshBufferCasos() {
 /**
  * Planilha USUARIOS
  */
-const PLANILHA_USUARIOS_ID        =  "1riI-LGssaVCrFeEai-he80uAkTauUQOIUa8DMc418rg";
+const PLANILHA_USUARIOS_ID        =  "1Y7xec9MTunLSJ0uDeLpOKZkcd6xXImQUc1f3hPFEjpM";
 const PLANILHA_USUARIOS           =  SpreadsheetApp.openById(PLANILHA_USUARIOS_ID);
 const TABELA_USUARIOS             =  PLANILHA_USUARIOS.getSheetByName('USUARIOS');
 const BUFFER_USUARIOS             =  TABELA_USUARIOS.getDataRange().getDisplayValues().splice(1);
