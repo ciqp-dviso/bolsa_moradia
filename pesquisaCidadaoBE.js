@@ -16,6 +16,8 @@
  */
 function pesquisaCidadaoBE( cpfCidadao ) {
 
+  Logger.log(Session.getActiveUser().getEmail());
+
   // Faz a pesquisa na base do CAD ÚNICO  
   let resultadoPesquisa = BUFFER_CADUNICO.filter( item => {    
     return( item[CPF] == cpfCidadao ); 

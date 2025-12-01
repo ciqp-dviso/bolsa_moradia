@@ -26,6 +26,8 @@
     document.getElementById( "dadosBeneficiario" ).style.display = "none";
     document.getElementById( "dadosFamilia" ).style.display = "none";
 
+    document.getElementById( "bt_addFamiliar" ).style.display = "none";    
+
     // Reset no número de familiares
     numeroDeFamiliares = 0;
 
@@ -42,7 +44,7 @@
     configurarPaginaBolsaMoradia();
 
     // Leitura do campo CPF
-    let cpf = document.getElementById( "cpfInput" ).value;
+    let cpf = document.getElementById( "input_cpf" ).value;
 
     // Validação do CPF informado
     let cpfValidado = validarCPF( cpf );
@@ -117,35 +119,37 @@
     let familiar = `
 
         <!-- Familiar ${numeroDeFamiliares} - Início -->
-        <div class="mb-5 p-4 bg-light border" id="familiar_${numeroDeFamiliares}">
+        <div class="mb-5 p-4 bg-light border rounded-2" id="familiar_${numeroDeFamiliares}">
+
+          <!-- Linha 1 - dados familiar -->
           <div class="row mb-1">       
             <div class="col-md-4">
-              <label for="nomeFamiliarInput_${numeroDeFamiliares}" class="form-label fw-bold">NOME COMPLETO</label>
+              <label for="input_nome_familiar_${numeroDeFamiliares}" class="form-label fw-bold">NOME COMPLETO</label>
             </div>              
             <div class="col-md-2">
-              <label for="dataNascimentoFamiliarInput_${numeroDeFamiliares}" class="form-label fw-bold">DATA DE NASCIMENTO</label>
+              <label for="input_dataNascimento_familiar_${numeroDeFamiliares}" class="form-label fw-bold">DATA DE NASCIMENTO</label>
             </div>            
             <div class="col-md-2">
-              <label for="parentescoFamiliarInput_${numeroDeFamiliares}" class="form-label fw-bold">PARENTESCO</label>
+              <label for="input_parentesco_familiar_${numeroDeFamiliares}" class="form-label fw-bold">PARENTESCO</label>
             </div>                                                                          
             <div class="col-md-3">
-              <label for="problemasSaudeFamiliarSelect_${numeroDeFamiliares}" class="form-label fw-bold">PROBLEMAS DE SAÚDE</label>
+              <label for="select_problemasSaude_familiar_${numeroDeFamiliares}" class="form-label fw-bold">PROBLEMAS DE SAÚDE</label>
             </div>                
             <div class="col-md-1"></div>        
           </div>    
       
           <div class="row mb-5">            
             <div class="col-md-4">
-              <input type="text" class="form-control" id="nomeFamiliarInput_${numeroDeFamiliares}">
+              <input type="text" class="form-control" id="input_nome_familiar_${numeroDeFamiliares}">
             </div>              
             <div class="col-md-2">
-              <input type="date" class="form-control" id="dataNascimentoFamiliarInput_${numeroDeFamiliares}">
+              <input type="date" class="form-control" id="input_dataNascimento_familiar_${numeroDeFamiliares}">
             </div>
             <div class="col-md-2">
-              <input type="text" class="form-control" id="parentescoFamiliarInput_${numeroDeFamiliares}">
+              <input type="text" class="form-control" id="input_parentesco_familiar_${numeroDeFamiliares}">
             </div>                          
             <div class="col-md-3">          
-              <select class="form-select" id="problemasSaudeFamiliarSelect_${numeroDeFamiliares}">
+              <select class="form-select" id="select_problemasSaude_familiar_${numeroDeFamiliares}">
                 <?!= gerarSelect( BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE ); ?>
               </select>
             </div>   
@@ -158,45 +162,172 @@
           </div>                  
 
 
+          <!-- Linha 2 - dados familiar -->
           <div class="row mb-1">       
             <div class="col-md-2">
-              <label for="racaCorFamiliarSelect_${numeroDeFamiliares}" class="form-label fw-bold">RAÇA/COR</label>
+              <label for="select_racaCor_familiar_${numeroDeFamiliares}" class="form-label fw-bold">RAÇA/COR</label>
             </div>              
             <div class="col-md-2">
-              <label for="generoFamiliarSelect_${numeroDeFamiliares}" class="form-label fw-bold">GÊNERO</label>
+              <label for="select_genero_familiar_${numeroDeFamiliares}" class="form-label fw-bold">GÊNERO</label>
             </div>            
             <div class="col-md-2">
-              <label for="orientacaoSexualFamiliarInput_${numeroDeFamiliares}" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
+              <label for="select_orientacaoSexual_familiar_${numeroDeFamiliares}" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
             </div>                                                                          
-            <div class="col-md-2">
-              <label for="pcdFamiliarSelect_${numeroDeFamiliares}" class="form-label fw-bold">PCD?</label>
-            </div>                
-            <div class="col-md-4"></div>        
+            <div class="col-md-6"></div>        
           </div>    
       
-          <div class="row mb-4">            
+          <div class="row mb-5">            
             <div class="col-md-2">
-              <select class="form-select" id="racaCorFamiliarSelect_${numeroDeFamiliares}">
+              <select class="form-select" id="select_racaCor_familiar_${numeroDeFamiliares}">
                 <?!= gerarSelect( BUFFER_RACAS_CORES ); ?>
               </select>
             </div>                          
             <div class="col-md-2">
-              <select class="form-select" id="generoFamiliarSelect_${numeroDeFamiliares}">
+              <select class="form-select" id="select_genero_familiar_${numeroDeFamiliares}">
                 <?!= gerarSelect( BUFFER_IDENTIDADES_DE_GENERO ); ?>
               </select>
             </div>
             <div class="col-md-2">
-              <select class="form-select" id="orientacaoSexualFamiliarInput_${numeroDeFamiliares}">
+              <select class="form-select" id="select_orientacaoSexual_familiar_${numeroDeFamiliares}">
                 <?!= gerarSelect( BUFFER_ORIENTACOES_SEXUAIS ); ?>
               </select>
             </div>   
-            <div class="col-md-2">
-              <select class="form-select" id="pcdFamiliarSelect_${numeroDeFamiliares}">
-                <?!= gerarSelect( BUFFER_RESPOSTAS_SIMPLES ); ?>
-              </select>
-            </div>   
-            <div class="col-md-4"></div>        
-          </div>              
+            <div class="col-md-6"></div>        
+          </div>    
+          
+          
+          <!-- Linha 3 - dados familiar -->             
+          <div class="row mb-4">
+            <p class="fw-bold">ESSE FAMILIAR É PCD?</p>
+            <div id="radiobutton_pcd_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'pcd_familiar_${numeroDeFamiliares}', 'uploadArquivo_pcd_familiar_${numeroDeFamiliares}', '2', 'igualdade' )">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "pcd_familiar_${numeroDeFamiliares}", 0 ); ?>
+            </div>    
+          </div>            
+    
+          <div class="mb-5" id="uploadArquivo_pcd_familiar_${numeroDeFamiliares}" style="display: none;">
+            <div class="row mb-1">
+              <div class="col-md-12">
+                <p class="fw-bold">INSIRA A DOCUMENTAÇÃO PCD</p>           
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">            
+                <input class="form-control" type="file" id="bt_uploadArquivo_pcd_familiar_${numeroDeFamiliares}">
+              </div>
+            </div>
+          </div>                           
+          
+    
+          <!-- Linha 4 - dados familiar -->             
+          <div class="row mb-4">
+            <p class="fw-bold">DIAGNÓSTICO DE SOFRIMENTO MENTAL, USO PREJUDICIAL DE ÁLCOOL E DROGAS E/OU DEPENDENTES DE CUIDADOS PARA A VIDA DIÁRIA?</p>
+            <div id="radiobutton_diagnostico_familiar_${numeroDeFamiliares}">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "diagnostico_familiar_${numeroDeFamiliares}", 0 ); ?>
+            </div>    
+          </div>
+          
+    
+          <!-- Linha 5 - dados familiar -->             
+          <div class="row mb-4">
+            <p class="fw-bold">MULHER EM GESTAÇÃO OU EM FASE DE PUERPÉRIO - ATÉ 6 MESES APÓS GESTAÇÃO?</p>
+            <div id="radiobutton_gestacao_familiar_${numeroDeFamiliares}">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "gestacao_familiar_${numeroDeFamiliares}", 0 ); ?>
+            </div>    
+          </div>
+          
+    
+          <!-- Linha 6 - dados familiar -->             
+          <div class="row mb-4">
+            <p class="fw-bold">CRIANÇAS E/OU ADOLESCENTES COM MEDIDA PROTETIVA DE ACOLHIMENTO?</p>
+            <div id="radiobutton_ceaMedidaProtetiva_familiar_${numeroDeFamiliares}">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaMedidaProtetiva_familiar_${numeroDeFamiliares}", 0 ); ?>
+            </div>    
+          </div>      
+    
+    
+          <!-- Linha 7 - dados familiar -->             
+          <div class="row mb-4">
+            <p class="fw-bold">CRIANÇAS/ADOLESCENTES EM SITUAÇÃO DE TRABALHO INFANTIL E/OU EXPLORAÇÃO SEXUAL?</p>
+            <div id="radiobutton_ceaTrabalhoExploracao_familiar_${numeroDeFamiliares}">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaTrabalhoExploracao_familiar_${numeroDeFamiliares}", 0 ); ?>
+            </div>    
+          </div>            
+    
+            
+          <!-- Linha 8 - dados familiar -->             
+          <div class="row mb-4">
+            <p class="fw-bold">ESTÁ VINCULADO(A) AO TRABALHO FORMAL?</p>
+            <div id="checkbox_trabalhoFormal_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'trabalhoFormal_familiar_${numeroDeFamiliares}', 'uploadArquivo_trabalhoFormal_familiar_${numeroDeFamiliares}', '2', 'igualdade' )">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "trabalhoFormal_familiar_${numeroDeFamiliares}", 0 ); ?>
+            </div>    
+          </div>                     
+          
+          <div class="mb-5" id="uploadArquivo_trabalhoFormal_familiar_${numeroDeFamiliares}" style="display: none;">
+            <div class="row mb-1">
+              <div class="col-md-6">
+                <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O TRABALHO FORMAL</p>           
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">            
+                <input class="form-control" type="file" id="bt_uploadArquivo_trabalhoFormal_familiar_${numeroDeFamiliares}">
+              </div>
+            </div>
+          </div>                           
+    
+          
+          <!-- Linha 9 - dados familiar -->             
+          <div class="row mb-4">
+            <p class="fw-bold">ESTÁ VINCULADO(A) AO TRABALHO INFORMAL, GRUPOS PRODUTIVOS, ASSOCIAÇÕES E COOPERATIVAS?</p>
+            <div id="checkbox_trabalhoInformal_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'trabalhoInformal_familiar_${numeroDeFamiliares}', 'descricao_trabalhoInformal_familiar_${numeroDeFamiliares}', '1', 'diferenca' )">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarCheckBox( BUFFER_TIPOS_DE_TRABALHO, "trabalhoInformal_familiar_${numeroDeFamiliares}", 0 ); ?>
+            </div>    
+          </div>                     
+          
+          <div class="row mb-5" id="descricao_trabalhoInformal_familiar_${numeroDeFamiliares}" style="display: none;">
+            <div class="col-md-10">
+              <label for="textarea_descricao_trabalhoInformal_familiar_${numeroDeFamiliares}" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DO TRABALHO</label>
+              <textarea class="form-control" id="textarea_descricao_trabalhoInformal_familiar_${numeroDeFamiliares}" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
+            </div>        
+          </div>   
+    
+            
+          <!-- Linha 10 - dados familiar  -->     
+          <div class="row mb-3">
+            <p class="fw-bold">É PARTICIPANTE DO PROGRAMA ESTAMOS JUNTOS, SEJA INSERIDO NAS FRENTES DE TRABALHO OU OPORTUNIDADE CLT?</p>
+            <div id="radiobutton_estamosJuntos_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'estamosJuntos_familiar_${numeroDeFamiliares}', 'uploadArquivo_estamosJuntos_familiar_${numeroDeFamiliares}', '2', 'igualdade' )">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "estamosJuntos_familiar_${numeroDeFamiliares}", 0 ); ?>
+            </div>    
+          </div>      
+            
+          <div class="mb-5" id="uploadArquivo_estamosJuntos_familiar_${numeroDeFamiliares}" style="display: none;">
+            <div class="row mb-1">
+              <div class="col-md-12">
+                <p class="fw-bold">INSIRA A DECLARAÇÃO DA SUTE (Subsecretaria de Trabalho e Emprego) SOBRE A PARTICIPAÇÃO NO PROGRAMA ESTAMOS JUNTOS</p>           
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">            
+                <input class="form-control" type="file" id="bt_uploadArquivo_estamosJuntos_familiar_${numeroDeFamiliares}">
+              </div>
+            </div>
+          </div>            
 
         </div>        
         <!-- Familiar - Fim -->    
@@ -232,87 +363,52 @@
   } // Fim da função removerFamiliar
 
 
-
   /**
-   * Função para mostrar os campos referentes às opções
-   * selecionadas no checkbox tipoTrabalhoCheckbox
+   * Função para mostrar, na página, um campo inicialmente invisível,
+   * se o valor selecionado no componente de origem do evento for
+   * igual ao parâmetro valorComparaçao
+   * 
+   * @param {String} nameComponenteOrigemEvento: Atributo name do elemento html onde
+   *                                             o evento ocorreu;
+   * @param {String} idElementoASerMostrado:  Atributo id do elemento html que será
+   *                                          mostrado;
+   * @param {String} valorComparacao:  Valor que será comparado com a opção
+   *                                   selecionada. Se forem iguais, o elemento
+   *                                   será mostrado. Caso contrário, será ocultado;
+   * @param {String} operadorComparacao:  "igualdade" - para operador ==
+   *                                      "diferenca" - para operados !=
    */
-  function mostrarCamposTrabalho() {
-    
+  function mostrarCampo( nameComponenteOrigemEvento,
+                         idElementoASerMostrado,
+                         valorComparacao,
+                         operadorComparacao ) {
+
     // Reset nos displays dos campos
-    document.getElementById( "docTrabalhoFormal" ).style.display = "none";
-    document.getElementById( "descricaoTrabalhoInformal" ).style.display = "none";
-    
-    // Ids dos tipos de trabalhos selecionados no checkbox tipoTrabalhoCheckbox      
-    const tipoTrabalhoCheckbox = document.querySelectorAll('input[name="tipoTrabalhoCheckbox"]:checked');
-    const arrayIdsTipoTrabalho = Array.from(tipoTrabalhoCheckbox).map(chk => chk.value);
+    document.getElementById( idElementoASerMostrado ).style.display = "none";
+        
+    // Ids das opcoes selecionadas
+    const opcoesSelecionadas = document.querySelectorAll(`input[name=${nameComponenteOrigemEvento}]:checked`);
+    const arrayIdsOpcoesSelecionadas = Array.from(opcoesSelecionadas).map(chk => chk.value);
 
     // Se algum checkbox dos tipos de trabalhos tiver sido selecionado
-    if( arrayIdsTipoTrabalho.length ) {
+    if( arrayIdsOpcoesSelecionadas.length ) {
 
-      arrayIdsTipoTrabalho.forEach( item => {
+      arrayIdsOpcoesSelecionadas.forEach( item => {
         
-        if(item == "3") document.getElementById( "docTrabalhoFormal" ).style.display = "";
-        if(item == "4") document.getElementById( "descricaoTrabalhoInformal" ).style.display = "";
+        switch( operadorComparacao ) {
+
+          case "igualdade":  if(item == valorComparacao) document.getElementById( idElementoASerMostrado ).style.display = "";        
+                     break;
+          case "diferenca":  if(item != valorComparacao) document.getElementById( idElementoASerMostrado ).style.display = "";        
+                     break;          
+        }
 
       }); 
     }
 
-  } // Fim da função mostrarCamposTrabalho
+  } // Fim da função mostrarCampo
 
 
-
-  /**
-   * Função para mostrar o campo referente à opção
-   * selecionada no checkbox estamosJuntosCheckbox
-   */
-  function mostrarCampoEstamosJuntos() {
-    
-    // Reset nos displays dos campos
-    document.getElementById( "docEstamosJuntos" ).style.display = "none";    
-    
-    // Ids dos tipos de trabalhos selecionados no checkbox tipoTrabalhoCheckbox      
-    const estamosJuntosCheckbox = document.querySelectorAll('input[name="estamosJuntosCheckbox"]:checked');
-    const arrayIdsEstamosJuntos = Array.from(estamosJuntosCheckbox).map(chk => chk.value);
-
-    // Se algum checkbox dos tipos de trabalhos tiver sido selecionado
-    if( arrayIdsEstamosJuntos.length ) {
-
-      arrayIdsEstamosJuntos.forEach( item => {
-        
-        if(item != "1") document.getElementById( "docEstamosJuntos" ).style.display = "";        
-
-      }); 
-    }
-
-  } // Fim da função mostrarCampoEstamosJuntos
-
-
-
-  /**
-   * Função para mostrar os campos referentes às opções
-   * selecionadas no checkbox violenciasFamiliaresCheckbox
-   */
-  function mostrarCamposViolenciasFamiliares() {
-    
-    // Reset nos displays dos campos
-    document.getElementById( "descricaoViolenciasFamiliares" ).style.display = "none";
-        
-    // Ids dos tipos de trabalhos selecionados no checkbox violenciasFamiliaresCheckbox      
-    const violenciasFamiliaresCheckbox = document.querySelectorAll('input[name="violenciasFamiliaresCheckbox"]:checked');
-    const arrayIdsViolenciasFamiliares = Array.from(violenciasFamiliaresCheckbox).map(chk => chk.value);
-
-    // Se algum checkbox dos tipos de trabalhos tiver sido selecionado
-    if( arrayIdsViolenciasFamiliares.length ) {
-
-      arrayIdsViolenciasFamiliares.forEach( item => {
-        
-        if(item != "1") document.getElementById( "descricaoViolenciasFamiliares" ).style.display = "";        
-
-      }); 
-    }
-
-  } // Fim da função mostrarCamposTrabalho
 
 
 </script>

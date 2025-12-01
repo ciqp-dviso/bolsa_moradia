@@ -6,16 +6,16 @@
       
 
       //Data de atualização do CADÚNICO
-      document.getElementById("dataAtualizacaoCADUnicoInput").value = caso.dataAtualizacaoCadastral.split("/").reverse().join("-");
+      document.getElementById("input_dataAtualizacaoCADUnico_beneficiario").value = caso.dataAtualizacaoCadastral.split("/").reverse().join("-");
       
       //Tempo de vida em BH      
-      document.getElementById("tempoResidenciaBHSelect").value = caso.tempoEmBH;
+      document.getElementById("select_tempoResidenciaBH_beneficiario").value = caso.tempoEmBH;
     
       //Tempo de vida nas ruas
-      document.getElementById("tempoSituacaoRuaSelect").value = caso.tempoNasRuas;
+      document.getElementById("select_tempoSituacaoRua_beneficiario").value = caso.tempoNasRuas;
     
       //Renda Identificada
-      document.getElementById("rendaIdentificadaInput").value = caso.renda;
+      document.getElementById("input_rendaIdentificada_beneficiario").value = caso.renda;
 
       //Fonte de renda Identificada
       //document.getElementById("fonteRenda").innerHTML = `<b>FONTE(S) DE RENDA: </b>${caso.fonteRenda.replace(",",", ")}`;
@@ -23,18 +23,18 @@
 
 
       //Quantidade de membros na família
-      document.getElementById("numeroDeFamiliaresInput").value = caso.numMembrosFamilia;
+      document.getElementById("input_numeroDeFamiliares_beneficiario").value = caso.numMembrosFamilia;
   
   
   
       //DADOS PESSOA
       //--------------------------------------------------------------
       //--------------------------------------------------------------
-      document.getElementById("nomeBeneficiarioInput").value = caso.nome;
+      document.getElementById("input_nome_beneficiario").value = caso.nome;
   
-      document.getElementById("dataNascimentoInput").value = caso.dataNascimento.split("/").reverse().join("-");
+      document.getElementById("input_dataNascimento_beneficiario").value = caso.dataNascimento.split("/").reverse().join("-");
   
-      document.getElementById("racaCorSelect").value = caso.racaCor;      
+      document.getElementById("select_racaCor_beneficiario").value = caso.racaCor;      
   
     
   }

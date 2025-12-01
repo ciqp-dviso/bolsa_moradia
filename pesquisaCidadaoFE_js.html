@@ -15,8 +15,6 @@
 
       google.script.run
                    .withSuccessHandler( retorno => {
-
-                     console.log( "Retorno Pesquisa: " + retorno.nome );
                
                      // Se localizado, mostra os campos do cadastro do benefíciário
                      if( retorno != false ) {
@@ -27,6 +25,8 @@
                        document.getElementById( "dadosCadUnico" ).style.display = "";
                        document.getElementById( "dadosEncaminhamento" ).style.display = "";
                        document.getElementById( "dadosBeneficiario" ).style.display = "";
+
+                       document.getElementById( "bt_addFamiliar" ).style.display = "";
 
                        exibeCidadao( retorno );
 

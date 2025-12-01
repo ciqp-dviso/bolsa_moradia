@@ -14,18 +14,15 @@
  *     . TIPOS_DE_TRABALHO
  *     . RACAS_CORES
  *     . IDENTIDADES_DE_GENERO
- *     . ORIENTACOES_SEXUAIS
- *     . CARACTERISTICAS_OUTROS_CIDADAOS
+ *     . ORIENTACOES_SEXUAIS 
  *     . CONDICOES_SAUDE
  *     . QUANTIDADE_PROBLEMAS_DE_SAUDE
- *     . VIOLENCIAS
- *     . VULNERABILIDADES
- *     . TEMPO_EM_SITUACAO_DE_RUA
- *     . TEMPO_EM_QUE_VIVE_NA_CIDADE
+ *     . VIOLENCIAS 
+ *     . INTERVALO_DE_TEMPO 
  *     . HISTORICO_INSTITUCIONALIZACAO
  *     . ESCOLARIDADE
  */
-const PLANILHA_CODIGOS_ID  =  "1bK0qGzFC6ETLp9aWhsxK3MWmvwvKqUijXnATP1F8R30";
+const PLANILHA_CODIGOS_ID  =  "1jf1vIfAjYxks0rkVr6KBSt8xrlRFqt_q57ldp2fCT3I";
 const PLANILHA_CODIGOS     =  SpreadsheetApp.openById(PLANILHA_CODIGOS_ID);
 
 const TABELA_RESPOSTAS_SIMPLES                =  PLANILHA_CODIGOS.getSheetByName('RESPOSTAS_SIMPLES');
@@ -35,13 +32,10 @@ const TABELA_TIPOS_DE_TRABALHO                =  PLANILHA_CODIGOS.getSheetByName
 const TABELA_RACAS_CORES                      =  PLANILHA_CODIGOS.getSheetByName('RACAS_CORES');
 const TABELA_IDENTIDADES_DE_GENERO            =  PLANILHA_CODIGOS.getSheetByName('IDENTIDADES_DE_GENERO');
 const TABELA_ORIENTACOES_SEXUAIS              =  PLANILHA_CODIGOS.getSheetByName('ORIENTACOES_SEXUAIS');
-const TABELA_CARACTERISTICAS_OUTROS_CIDADAOS  =  PLANILHA_CODIGOS.getSheetByName('CARACTERISTICAS_OUTROS_CIDADAOS');
 const TABELA_CONDICOES_SAUDE                  =  PLANILHA_CODIGOS.getSheetByName('CONDICOES_SAUDE');
 const TABELA_QUANTIDADE_PROBLEMAS_DE_SAUDE    =  PLANILHA_CODIGOS.getSheetByName('QUANTIDADE_PROBLEMAS_DE_SAUDE');
 const TABELA_VIOLENCIAS                       =  PLANILHA_CODIGOS.getSheetByName('VIOLENCIAS');
-const TABELA_VULNERABILIDADES                 =  PLANILHA_CODIGOS.getSheetByName('VULNERABILIDADES');
-const TABELA_TEMPO_EM_SITUACAO_DE_RUA         =  PLANILHA_CODIGOS.getSheetByName('TEMPO_EM_SITUACAO_DE_RUA');
-const TABELA_TEMPO_EM_QUE_VIVE_NA_CIDADE      =  PLANILHA_CODIGOS.getSheetByName('TEMPO_EM_QUE_VIVE_NA_CIDADE');
+const TABELA_INTERVALO_DE_TEMPO               =  PLANILHA_CODIGOS.getSheetByName('INTERVALO_DE_TEMPO');
 const TABELA_HISTORICO_INSTITUCIONALIZACAO    =  PLANILHA_CODIGOS.getSheetByName('HISTORICO_INSTITUCIONALIZACAO');
 const TABELA_ESCOLARIDADE                     =  PLANILHA_CODIGOS.getSheetByName('ESCOLARIDADE');
 
@@ -53,13 +47,10 @@ const BUFFER_TIPOS_DE_TRABALHO                =  TABELA_TIPOS_DE_TRABALHO.getDat
 const BUFFER_RACAS_CORES                      =  TABELA_RACAS_CORES.getDataRange().getDisplayValues().splice(1);
 const BUFFER_IDENTIDADES_DE_GENERO            =  TABELA_IDENTIDADES_DE_GENERO.getDataRange().getDisplayValues().splice(1);
 const BUFFER_ORIENTACOES_SEXUAIS              =  TABELA_ORIENTACOES_SEXUAIS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_CARACTERISTICAS_OUTROS_CIDADAOS  =  TABELA_CARACTERISTICAS_OUTROS_CIDADAOS.getDataRange().getDisplayValues().splice(1);
 const BUFFER_CONDICOES_SAUDE                  =  TABELA_CONDICOES_SAUDE.getDataRange().getDisplayValues().splice(1);
 const BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE    =  TABELA_QUANTIDADE_PROBLEMAS_DE_SAUDE.getDataRange().getDisplayValues().splice(1);
 const BUFFER_VIOLENCIAS                       =  TABELA_VIOLENCIAS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_VULNERABILIDADES                 =  TABELA_VULNERABILIDADES.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TEMPO_EM_SITUACAO_DE_RUA         =  TABELA_TEMPO_EM_SITUACAO_DE_RUA.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TEMPO_EM_QUE_VIVE_NA_CIDADE      =  TABELA_TEMPO_EM_QUE_VIVE_NA_CIDADE.getDataRange().getDisplayValues().splice(1);
+const BUFFER_INTERVALO_DE_TEMPO               =  TABELA_INTERVALO_DE_TEMPO.getDataRange().getDisplayValues().splice(1);
 const BUFFER_HISTORICO_INSTITUCIONALIZACAO    =  TABELA_HISTORICO_INSTITUCIONALIZACAO.getDataRange().getDisplayValues().splice(1);
 const BUFFER_ESCOLARIDADE                     =  TABELA_ESCOLARIDADE.getDataRange().getDisplayValues().splice(1);
 
@@ -71,13 +62,10 @@ const NUM_TIPOS_DE_TRABALHO                =  BUFFER_TIPOS_DE_TRABALHO.length;
 const NUM_RACAS_CORES                      =  BUFFER_RACAS_CORES.length;
 const NUM_IDENTIDADES_DE_GENERO            =  BUFFER_IDENTIDADES_DE_GENERO.length;
 const NUM_ORIENTACOES_SEXUAIS              =  BUFFER_ORIENTACOES_SEXUAIS.length;
-const NUM_CARACTERISTICAS_OUTROS_CIDADAOS  =  BUFFER_CARACTERISTICAS_OUTROS_CIDADAOS.length;
 const NUM_CONDICOES_SAUDE                  =  BUFFER_CONDICOES_SAUDE.length;
 const NUM_QUANTIDADE_PROBLEMAS_DE_SAUDE    =  BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE.length;
 const NUM_VIOLENCIAS                       =  BUFFER_VIOLENCIAS.length;
-const NUM_VULNERABILIDADES                 =  BUFFER_VULNERABILIDADES.length;
-const NUM_TEMPO_EM_SITUACAO_DE_RUA         =  BUFFER_TEMPO_EM_SITUACAO_DE_RUA.length;
-const NUM_TEMPO_EM_QUE_VIVE_NA_CIDADE      =  BUFFER_TEMPO_EM_QUE_VIVE_NA_CIDADE.length;
+const NUM_INTERVALO_DE_TEMPO               =  BUFFER_INTERVALO_DE_TEMPO.length;
 const NUM_HISTORICO_INSTITUCIONALIZACAO    =  BUFFER_HISTORICO_INSTITUCIONALIZACAO.length;
 const NUM_ESCOLARIDADE                     =  BUFFER_ESCOLARIDADE.length;
 
@@ -85,7 +73,7 @@ const NUM_ESCOLARIDADE                     =  BUFFER_ESCOLARIDADE.length;
 /**
  * Planilha CADUNICO
  */
-const PLANILHA_CADUNICO_ID        =  "1NXhu3ZH6pz8zUMu4cbye-i5oEW8uT_gzCVQHXgu513g";
+const PLANILHA_CADUNICO_ID        =  "1hI3gHo9eLbk1sCkarSD5lWFjwxFf83DThFaWNPNP3ak";
 const PLANILHA_CADUNICO           =  SpreadsheetApp.openById(PLANILHA_CADUNICO_ID);
 const TABELA_CADUNICO             =  PLANILHA_CADUNICO.getSheetByName('BASE_DADOS');
 let BUFFER_CADUNICO               =  TABELA_CADUNICO.getDataRange().getDisplayValues().splice(1);
@@ -96,7 +84,7 @@ const NUM_COLUNAS_TABELA_CADUNICO =  13;
 /**
  * Planilha CASOS
  */
-const PLANILHA_CASOS_ID        =  "1HlgS8mL542IhcNGzjnHj9OC_Z0ObXJ225OOV7HkARnI";
+const PLANILHA_CASOS_ID        =  "18o5wcTGkF5kVEFMrDr_dmwEgQWqSXemBf0IuNc3tQNU";
 const PLANILHA_CASOS           =  SpreadsheetApp.openById(PLANILHA_CASOS_ID);
 const TABELA_CASOS             =  PLANILHA_CASOS.getSheetByName('CASOS');
 let BUFFER_CASOS               =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
@@ -112,7 +100,7 @@ function refreshBufferCasos() {
 /**
  * Planilha USUARIOS
  */
-const PLANILHA_USUARIOS_ID        =  "1Y7xec9MTunLSJ0uDeLpOKZkcd6xXImQUc1f3hPFEjpM";
+const PLANILHA_USUARIOS_ID        =  "1riI-LGssaVCrFeEai-he80uAkTauUQOIUa8DMc418rg";
 const PLANILHA_USUARIOS           =  SpreadsheetApp.openById(PLANILHA_USUARIOS_ID);
 const TABELA_USUARIOS             =  PLANILHA_USUARIOS.getSheetByName('USUARIOS');
 const BUFFER_USUARIOS             =  TABELA_USUARIOS.getDataRange().getDisplayValues().splice(1);
