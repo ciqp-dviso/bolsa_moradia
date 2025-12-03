@@ -5,6 +5,12 @@
   // Cache das páginas do sistema, carregados via chamada 
   // da função backend include( "nomePagina" )
   let cachePaginaBolsaMoradia;
+
+
+  // Flag que indica se a página inicial foi carregada
+  //    0: ainda não foi carregada
+  //    1: já foi carregada
+  let flagPaginaInicialCarregada = 0;
   
 
   // timer
@@ -33,7 +39,12 @@
       case "paginaBolsaMoradia": 
                               // Carrega a página resumosDosCasos.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
-                              await esperar( 15000 );
+
+                              while( !flagPaginaInicialCarregada ) {
+                                console.log( "Aguardando carregamento da página na cache" );
+                                await esperar( 1000 );
+                              }
+                              
                               document.getElementById("conteudo").innerHTML = cachePaginaBolsaMoradia;  
 
                               // Configura a página de resumos dos casos
@@ -90,6 +101,7 @@
                     // Atribui a página carregada ao cache apropriado
                     switch( nomePagina ) {
                       case "paginaBolsaMoradia":  cachePaginaBolsaMoradia = pagina;
+                                                  flagPaginaInicialCarregada = 1;
                                                   break;                      
                       default:                    throw( new Error( "Página Inválida" ) ); 
                     }
