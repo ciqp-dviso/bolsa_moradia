@@ -28,6 +28,10 @@
 
     document.getElementById( "bt_addFamiliar" ).style.display = "none";    
 
+    document.getElementById( "assinatura_beneficiario" ).style.display = "none";    
+    document.getElementById( "termoResponsabilidadeTecnico" ).style.display = "none";    
+
+
     // Reset no número de familiares
     numeroDeFamiliares = 0;
 
@@ -129,12 +133,12 @@
             <div class="col-md-2">
               <label for="input_dataNascimento_familiar_${numeroDeFamiliares}" class="form-label fw-bold">DATA DE NASCIMENTO</label>
             </div>            
-            <div class="col-md-2">
-              <label for="input_parentesco_familiar_${numeroDeFamiliares}" class="form-label fw-bold">PARENTESCO</label>
-            </div>                                                                          
             <div class="col-md-3">
-              <label for="select_problemasSaude_familiar_${numeroDeFamiliares}" class="form-label fw-bold">PROBLEMAS DE SAÚDE</label>
-            </div>                
+              <label for="select_parentesco_familiar_${numeroDeFamiliares}" class="form-label fw-bold">PARENTESCO</label>
+            </div>                                                 
+            <div class="col-md-2">
+              <label for="input_cpf_familiar_${numeroDeFamiliares}" class="form-label fw-bold">CPF</label>
+            </div>                                                                             
             <div class="col-md-1"></div>        
           </div>    
       
@@ -145,14 +149,14 @@
             <div class="col-md-2">
               <input type="date" class="form-control" id="input_dataNascimento_familiar_${numeroDeFamiliares}">
             </div>
-            <div class="col-md-2">
-              <input type="text" class="form-control" id="input_parentesco_familiar_${numeroDeFamiliares}">
-            </div>                          
-            <div class="col-md-3">          
-              <select class="form-select" id="select_problemasSaude_familiar_${numeroDeFamiliares}">
-                <?!= gerarSelect( BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE ); ?>
+            <div class="col-md-3">
+              <select class="form-select" id="select_parentesco_familiar_${numeroDeFamiliares}">
+                <?!= gerarSelect( BUFFER_PARENTESCO ); ?>
               </select>
             </div>   
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="input_cpf_familiar_${numeroDeFamiliares}">
+            </div>                                                                             
             <button type="button" class="btn btn-secondary col-md-1" onclick="removerFamiliar('familiar_${numeroDeFamiliares}')">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
@@ -172,8 +176,11 @@
             </div>            
             <div class="col-md-2">
               <label for="select_orientacaoSexual_familiar_${numeroDeFamiliares}" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
-            </div>                                                                          
-            <div class="col-md-6"></div>        
+            </div>                         
+            <div class="col-md-3">
+              <label for="select_problemasSaude_familiar_${numeroDeFamiliares}" class="form-label fw-bold">PROBLEMAS DE SAÚDE</label>
+            </div>                                                                             
+            <div class="col-md-3"></div>        
           </div>    
       
           <div class="row mb-5">            
@@ -192,9 +199,25 @@
                 <?!= gerarSelect( BUFFER_ORIENTACOES_SEXUAIS ); ?>
               </select>
             </div>   
-            <div class="col-md-6"></div>        
+            <div class="col-md-3">          
+              <select class="form-select" id="select_problemasSaude_familiar_${numeroDeFamiliares}">
+                <?!= gerarSelect( BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE ); ?>
+              </select>
+            </div>               
+            <div class="col-md-3"></div>        
           </div>    
           
+
+          <!-- Linha 2.5 - dados familiar -->          
+          <div class="row mb-5">          
+            <div class="col-md-12">
+              <input class="form-check-input border rounded-2 me-1" type="checkbox" value="1" id="checkbox_segundaRF_familiar_${numeroDeFamiliares}">              
+              <label class="form-check-label fw-bold" for="checkbox_segundaRF_familiar_${numeroDeFamiliares}">
+                2ª PESSOA RESPONSÁVEL PELA UNIDADE FAMILIAR - RF
+              </label>                      
+            </div>      
+          </div>  
+
           
           <!-- Linha 3 - dados familiar -->             
           <div class="row mb-4">

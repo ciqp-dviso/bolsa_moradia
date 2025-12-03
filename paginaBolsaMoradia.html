@@ -153,8 +153,8 @@
       </div>    
       <div class="row mb-5">            
         <div class="col-md-2">
-          <input class="form-check-input me-1" type="checkbox" value="1" id="checkbox_condicoesMinimas_beneficiario">
-          <label class="form-check-label" for="checkbox_condicoesMinimas_beneficiario">Afirmo que sim</label>        
+          <input class="form-check-input border rounded-2 me-1" type="checkbox" value="1" id="checkbox_condicoesMinimas_beneficiario">
+          <label class="form-check-label fw-bold" for="checkbox_condicoesMinimas_beneficiario">Afirmo que sim</label>        
         </div>      
       </div>          
 
@@ -262,7 +262,9 @@
         <div class="col-md-4">
           <label for="select_orientacaoSexual_beneficiario" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
         </div>                
-        <div class="col-md-4"></div>                                              
+        <div class="col-md-4">
+          <label for="input_rendaFamiliar_beneficiario" class="form-label fw-bold">RENDA FAMILIAR MENSAL</label>
+        </div>              
       </div>      
 
       <div class="row mb-4">          
@@ -278,9 +280,52 @@
             <?!= gerarSelect( BUFFER_ORIENTACOES_SEXUAIS ); ?>
           </select>
         </div>              
-        <div class="col-md-6"></div>
+        <div class="col-md-2"></div>
+
+        <div class="col-md-2">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon2">R$</span>
+            <input type="text" class="form-control" id="input_rendaFamiliar_beneficiario" aria-describedby="basic-addon2">
+            <span class="input-group-text">,00</span>
+          </div>
+        </div>        
+        <div class="col-md-2"></div>
       </div>
       
+
+      <!-- Linha 3.1 - dados beneficiário -->
+      <div class="row mb-1">       
+        <div class="col-md-5">
+          <label for="input_nomeMae_beneficiario" class="form-label fw-bold">NOME COMPLETO DA MÃE</label>
+        </div>      
+        <div class="col-md-7"></div>
+      </div>    
+  
+      <div class="row mb-5">            
+        <div class="col-md-5">
+          <input type="text" class="form-control" id="input_nomeMae_beneficiario">
+        </div>              
+        <div class="col-md-7"></div>
+      </div>       
+
+
+      <!-- Linha 3.2 - dados beneficiário -->
+      <div class="row mb-1">
+        <div class="col-md-12">
+          <p class="fw-bold">INSIRA O DOCUMENTO COM FOTO QUE APRESENTE O NÚMERO DO CPF DO BENEFICIÁRIO/BENEFICIÁRIA</p>           
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-md-12">
+          <p>Caso o usuário não esteja com a documentação regularizada, ele deverá estar ciente de que, após a convocação, deverá apresentá-la obrigatoriamente no ato do cadastro na Urbel. </p>           
+        </div>
+      </div>      
+      <div class="row mb-5">
+        <div class="col-md-5">            
+          <input class="form-control" type="file" id="bt_uploadArquivo_doc_beneficiario">
+        </div>
+      </div>       
+
 
       <!-- Linha 4 - dados beneficiário -->             
       <div class="row mb-4">
@@ -469,6 +514,95 @@
       <div class="row justify-content-md-center mb-5">  
           <button type="button" class="btn btn-primary col col-2" onclick="adicionarFamiliar()">Adicionar Familiar</button> 
       </div>              
+    </section>
+
+
+
+    <section id="assinatura_beneficiario">    
+
+      <br><hr><br>
+
+      <div class="row mb-2">        
+        <div class="col-md-12 fw-bold">          
+          DOCUMENTO COM ASSINATURA DO USUÁRIO
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5 mb-5">          
+          <input class="form-control" type="file" id="bt_upload_assinatura_beneficiario">
+        </div>
+      </div>           
+             
+    </section>
+
+
+    <section id="termoResponsabilidadeTecnico">    
+
+      <div class="row mb-2">        
+        <div class="col-md-12 fw-bold">          
+          TERMO DE RESPONSABILIDADE DO TÉCNICO
+        </div>
+      </div>
+
+      <div class="row mb-2">        
+        <div class="col-md-12">          
+          Declaro que o(a) beneficiário(a) aqui inscrito(a) está no Cadastro Único e foi encaminhado(a) ao Programa Bolsa Moradia, nos termos do Decreto Municipal nº 11.375/2003 e alterações posteriores.
+        </div>
+      </div>  
+      <div class="row mb-2">
+        <div class="col-md-12">          
+          Este equipamento assume o compromisso de acompanhar a inserção da pessoa/família inscrita, promovendo o acompanhamento social necessário para apoiar o seu acesso ao Programa.
+        </div>  
+      </div>  
+      <div class="row mb-3">
+        <div class="col-md-12">          
+          O acompanhamento compreenderá, entre outras ações, instrução ao beneficiário sobre as etapas de acesso e permanência do Programa Bolsa Moradia, que são:
+        </div>  
+      </div>  
+      <div class="row mb-2">
+        <div class="col-md-12">          
+          - Apresentação de documentação de cadastro à Urbel;
+        </div>  
+      </div>  
+      <div class="row mb-2">
+        <div class="col-md-12">          
+          - Indicação de imóvel para agendamento de vistoria a ser realizada pela Urbel;
+        </div>  
+      </div>  
+      <div class="row mb-2">
+        <div class="col-md-12">          
+          - Acompanhamento dos resultados da vistoria;
+        </div>  
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-12">          
+          - Apresentação do contrato de aluguel à Urbel;
+        </div>  
+      </div>  
+      <div class="row mb-3">
+        <div class="col-md-12">          
+          - Apresentação dos recibos de pagamento do aluguel mensalmente à Urbel.
+        </div>  
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-12">          
+          O acompanhamento também envolve o apoio na comunicação com o beneficiário(a) a respeito dos prazos a serem cumpridos para concluir o acesso ao benefício, e que sua não conclusão em até 6 meses levará à exclusão da habilitação do beneficiário.
+        </div>  
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12">          
+          O serviço se compromete com o acompanhamento do usuário desde o processo de indicação até a conclusão da inserção no Programa Bolsa Moradia, através de atendimentos periódicos a serem definidos e pactuados com o usuário.
+        </div>  
+      </div>  
+
+      <div class="row mb-5">            
+        <div class="col-md-2">
+          <input class="form-check-input border rounded-2 me-1" type="checkbox" value="1" id="checkbox_termoResponsabilidadeTecnico">
+          <label class="form-check-label fw-bold" for="checkbox_termoResponsabilidadeTecnico">De acordo</label>        
+        </div>      
+      </div>              
+
     </section>
 
 

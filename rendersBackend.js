@@ -11,8 +11,6 @@
  */
 function gerarCheckBox( tabela, nameCheckBox, inline ) {
  
-   
-
   // Gera, dinamicamente, as opções do Check Box
   let checkBoxGerado = "";
   let idItem;
