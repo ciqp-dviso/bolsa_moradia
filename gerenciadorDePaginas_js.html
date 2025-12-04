@@ -7,10 +7,10 @@
   let cachePaginaBolsaMoradia;
 
 
-  // Flag que indica se a página inicial foi carregada
+  // Flag que indica se a página Bolsa Moradia foi carregada
   //    0: ainda não foi carregada
   //    1: já foi carregada
-  let flagPaginaInicialCarregada = 0;
+  let flagPaginaBolsaMoradiaCarregada = 0;
   
 
   // timer
@@ -40,7 +40,7 @@
                               // Carrega a página resumosDosCasos.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
 
-                              while( !flagPaginaInicialCarregada ) {
+                              while( !flagPaginaBolsaMoradiaCarregada ) {
                                 console.log( "Aguardando carregamento da página na cache" );
                                 await esperar( 1000 );
                               }
@@ -101,7 +101,7 @@
                     // Atribui a página carregada ao cache apropriado
                     switch( nomePagina ) {
                       case "paginaBolsaMoradia":  cachePaginaBolsaMoradia = pagina;
-                                                  flagPaginaInicialCarregada = 1;
+                                                  flagPaginaBolsaMoradiaCarregada = 1;
                                                   break;                      
                       default:                    throw( new Error( "Página Inválida" ) ); 
                     }
