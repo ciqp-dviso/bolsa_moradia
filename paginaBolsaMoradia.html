@@ -32,7 +32,6 @@
         </div>
       </div>
     </section>  
-
     
     
     <section id="mensagemCadUnicoNaoLocalizado">    
@@ -197,7 +196,7 @@
       </div>             
 
 
-      <!-- Linha 1 - dados beneficiário -->
+      <!-- Dados beneficiário - Linha 1 -->
       <div class="row mb-1">       
         <div class="col-md-6">
           <label for="input_nome_beneficiario" class="form-label fw-bold">NOME COMPLETO</label>
@@ -219,7 +218,7 @@
       </div>       
 
 
-      <!-- Linha 2 - dados beneficiário -->       
+      <!-- Dados beneficiário - Linha 2 -->       
       <div class="row mb-1"> 
         <div class="col-md-4">
           <label for="input_dataNascimento_beneficiario" class="form-label fw-bold">DATA DE NASCIMENTO</label>
@@ -254,7 +253,7 @@
       </div>             
 
 
-      <!-- Linha 3 - dados beneficiário -->       
+      <!-- Dados beneficiário - Linha 3 -->       
       <div class="row mb-1">       
         <div class="col-md-4">
           <label for="select_genero_beneficiario" class="form-label fw-bold">GÊNERO AUTODECLARADO</label>
@@ -293,7 +292,7 @@
       </div>
       
 
-      <!-- Linha 3.1 - dados beneficiário -->
+      <!-- Dados beneficiário - Linha 4 -->
       <div class="row mb-1">       
         <div class="col-md-5">
           <label for="input_nomeMae_beneficiario" class="form-label fw-bold">NOME COMPLETO DA MÃE</label>
@@ -309,7 +308,7 @@
       </div>       
 
 
-      <!-- Linha 3.2 - dados beneficiário -->
+      <!-- Dados beneficiário - Linha 5 -->
       <div class="row mb-1">
         <div class="col-md-12">
           <p class="fw-bold">INSIRA O DOCUMENTO COM FOTO QUE APRESENTE O NÚMERO DO CPF DO BENEFICIÁRIO/BENEFICIÁRIA</p>           
@@ -327,16 +326,15 @@
       </div>       
 
 
-      <!-- Linha 4 - dados beneficiário -->             
+      <!-- Dados beneficiário - Linha 6 -->             
       <div class="row mb-4">
         <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA É PCD?</p>
         <div id="radiobutton_pcd_beneficiario" onchange="mostrarCampo( 'pcd_beneficiario', 'uploadArquivo_pcd_beneficiario', '2', 'igualdade' )">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "pcd_beneficiario", 0 ); ?>
         </div>    
       </div>    
-
 
       <div class="mb-5" id="uploadArquivo_pcd_beneficiario" style="display: none;">
         <div class="row mb-1">
@@ -352,34 +350,34 @@
       </div>                  
       
 
-      <!-- Linha 5 - dados beneficiário -->             
+      <!-- Dados beneficiário - Linha 7 -->             
       <div class="row mb-4">
         <p class="fw-bold">DIAGNÓSTICO DE SOFRIMENTO MENTAL, USO PREJUDICIAL DE ÁLCOOL E DROGAS E/OU DEPENDENTES DE CUIDADOS PARA A VIDA DIÁRIA?</p>
         <div id="radiobutton_diagnostico_beneficiario">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "diagnostico_beneficiario", 0 ); ?>
         </div>    
       </div>
       
 
-      <!-- Linha 6 - dados beneficiário -->             
+      <!-- Dados beneficiário - Linha 8 -->             
       <div class="row mb-4">
         <p class="fw-bold">MULHER EM GESTAÇÃO OU EM FASE DE PUERPÉRIO - ATÉ 6 MESES APÓS GESTAÇÃO?</p>
         <div id="radiobutton_gestacao_beneficiario">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "gestacao_beneficiario", 0 ); ?>
         </div>    
       </div>
 
       
-      <!-- Linha 7 - dados beneficiário -->             
+      <!-- Dados beneficiário - Linha 9 -->             
       <div class="row mb-4">
         <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA ESTÁ VINCULADO(A) AO TRABALHO FORMAL?</p>
-        <div id="checkbox_trabalhoFormal_beneficiario" onchange="mostrarCampo( 'trabalhoFormal_beneficiario', 'uploadArquivo_trabalhoFormal_beneficiario', '2', 'igualdade' )">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
+        <div id="radiobutton_trabalhoFormal_beneficiario" onchange="mostrarCampo( 'trabalhoFormal_beneficiario', 'uploadArquivo_trabalhoFormal_beneficiario', '2', 'igualdade' )">
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "trabalhoFormal_beneficiario", 0 ); ?>
         </div>    
       </div>                     
@@ -398,10 +396,10 @@
       </div>                           
 
       
-      <!-- Linha 8 - dados beneficiário -->             
+      <!-- Dados beneficiário - Linha 10 -->             
       <div class="row mb-4">
         <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA ESTÁ VINCULADO(A) AO TRABALHO INFORMAL, GRUPOS PRODUTIVOS, ASSOCIAÇÕES E COOPERATIVAS?</p>
-        <div id="checkbox_trabalhoInformal_beneficiario" onchange="mostrarCampo( 'trabalhoInformal_beneficiario', 'descricao_trabalhoInformal_beneficiario', '1', 'diferenca' )">
+        <div id="checkbox_trabalhoInformal_beneficiario" onchange="handlerCheckboxPaginaBM( 'trabalhoInformal_beneficiario', 'descricao_trabalhoInformal_beneficiario', '1', 'diferenca' )">
           <!-- 1: checkbox inline   -->
           <!-- 0: checkbox vertical -->
           <?!= gerarCheckBox( BUFFER_TIPOS_DE_TRABALHO, "trabalhoInformal_beneficiario", 0 ); ?>
@@ -416,12 +414,12 @@
       </div>   
 
       
-      <!-- Linha 9 - dados beneficiário -->             
+      <!-- Dados beneficiário - Linha 11 -->             
       <div class="row mb-4">
         <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA É PARTICIPANTE DO PROGRAMA ESTAMOS JUNTOS, SEJA INSERIDO NAS FRENTES DE TRABALHO OU OPORTUNIDADE CLT?</p>
         <div id="radiobutton_estamosJuntos_beneficiario" onchange="mostrarCampo( 'estamosJuntos_beneficiario', 'uploadArquivo_estamosJuntos_beneficiario', '2', 'igualdade' )">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "estamosJuntos_beneficiario", 0 ); ?>
         </div>    
       </div>            
@@ -440,7 +438,7 @@
       </div>                           
 
                         
-      <!-- Linha 10 - dados beneficiário -->             
+      <!-- Dados beneficiário - Linha 12 -->             
       <div class="row mb-4">
         <p class="fw-bold">A PESSOA CANDIDATA TEM HISTÓRICO DE INSTITUCIONALIZAÇÃO?</p>
         <div id="checkbox_institucionalizacao_beneficiario">
@@ -451,7 +449,7 @@
       </div>      
 
 
-      <!-- Linha 11 - dados beneficiário -->             
+      <!-- Dados beneficiário - Linha 13 -->             
       <div class="row mb-4">
         <p class="fw-bold">A PESSOA CANDIDATA AO BENEFÍCIO POSSUI ALGUMA DAS CONDIÇÕES DE SAÚDE LISTADAS ABAIXO?</p>
         <div id="checkbox_saude_beneficiario">
@@ -462,10 +460,10 @@
       </div>      
 
 
-      <!-- Linha 12 - dados beneficiário -->
+      <!-- Dados beneficiário - Linha 14 -->
       <div class="row mb-4">
         <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, HÁ INDIVÍDUOS EM SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS?</p>
-        <div id="checkbox_violenciasFamiliares_beneficiario" onchange="mostrarCampo( 'violenciasFamiliares', 'descricaoViolenciasFamiliares_beneficiario', '1', 'diferenca' )">
+        <div id="checkbox_violenciasFamiliares_beneficiario" onchange="handlerCheckboxPaginaBM( 'violenciasFamiliares', 'descricaoViolenciasFamiliares_beneficiario', '1', 'diferenca' )">
           <!-- 1: checkbox inline   -->
           <!-- 0: checkbox vertical -->
           <?!= gerarCheckBox( BUFFER_VIOLENCIAS, "violenciasFamiliares", 0 ); ?>
@@ -480,12 +478,12 @@
       </div>   
 
 
-      <!-- Linha 13 - dados beneficiário -->
+      <!-- Dados beneficiário - Linha 15 -->
       <div class="row mb-4">
         <p class="fw-bold">O(A) BENEFICIÁRIO(A) OU ALGUÉM DA FAMÍLIA ESTÁ EM SITUAÇÃO DE PROSTITUIÇÃO?</p>
         <div id="radiobutton_prostituicaoFamiliares_beneficiario">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "prostituicaoFamiliares_beneficiario", 0 ); ?>
         </div>    
       </div>                       
@@ -517,7 +515,31 @@
     </section>
 
 
+    <!-- Informações adicionais -->
+    <section id="informacoes_adicionais_beneficiario">    
 
+      <br><hr><br>
+
+      <div class="row mb-1">
+        <div class="col-md-12">
+          <p class="fw-bold">INFORMAÇÕES TÉCNICAS ADICIONAIS</p>           
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-md-12">
+          <p>Apresente de forma resumida informações gerais sobre a trajetória do sujeito e intervenções realizadas pelo serviço.</p>           
+        </div>
+      </div>      
+      <div class="row mb-4">
+        <div class="col-md-10">
+          <textarea class="form-control" id="textarea_informacoes_adicionais_beneficiario" rows="4" cols="50" maxlength="200" placeholder="Digite aqui o relato sucinto"></textarea>
+        </div>        
+      </div>   
+
+    </section>
+
+
+    <!-- Assinatura do beneficiário-->
     <section id="assinatura_beneficiario">    
 
       <br><hr><br>
@@ -528,16 +550,19 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-5 mb-5">          
+      <div class="row mb-4">
+        <div class="col-md-5">          
           <input class="form-control" type="file" id="bt_upload_assinatura_beneficiario">
         </div>
-      </div>           
+      </div>      
+      
+      <br><hr><br>
              
     </section>
 
 
-    <section id="termoResponsabilidadeTecnico">    
+    <!-- Termo de responsabilidade do técnico -->
+    <section id="termoResponsabilidadeTecnico" class="border rounded-2 mb-5 mt-2 p-4">    
 
       <div class="row mb-2">        
         <div class="col-md-12 fw-bold">          
@@ -596,7 +621,7 @@
         </div>  
       </div>  
 
-      <div class="row mb-5">            
+      <div class="row justify-content-md-center">            
         <div class="col-md-2">
           <input class="form-check-input border rounded-2 me-1" type="checkbox" value="1" id="checkbox_termoResponsabilidadeTecnico">
           <label class="form-check-label fw-bold" for="checkbox_termoResponsabilidadeTecnico">De acordo</label>        
@@ -608,6 +633,8 @@
 
   </main> 
   <!-- Main - Parte principal da tela Edição de Caso - Fim -->
+
+
 
 
   <!-- Nav - Botões Inferiores Gravar Encaminhamento - Início -->

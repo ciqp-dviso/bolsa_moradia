@@ -20,13 +20,9 @@
       //Fonte de renda Identificada
       //document.getElementById("fonteRenda").innerHTML = `<b>FONTE(S) DE RENDA: </b>${caso.fonteRenda.replace(",",", ")}`;
       
-
-
       //Quantidade de membros na família
       document.getElementById("input_numeroDeFamiliares_beneficiario").value = caso.numMembrosFamilia;
-  
-  
-  
+    
       //DADOS PESSOA
       //--------------------------------------------------------------
       //--------------------------------------------------------------
@@ -35,6 +31,8 @@
       document.getElementById("input_dataNascimento_beneficiario").value = caso.dataNascimento.split("/").reverse().join("-");
   
       document.getElementById("select_racaCor_beneficiario").value = caso.racaCor;      
+
+      document.getElementById("input_nomeMae_beneficiario").value = caso.nomeMae;      
   
     
   }

@@ -1,0 +1,50 @@
+<script>
+
+  "use strict";    
+
+  /**
+   * Função para mostrar, na página, um campo inicialmente invisível,
+   * se o valor selecionado no componente de origem do evento for
+   * igual ao parâmetro valorComparaçao
+   * 
+   * @param {String} nameComponenteOrigemEvento: Atributo name do elemento html onde
+   *                                             o evento ocorreu;
+   * @param {String} idElementoASerMostrado:  Atributo id do elemento html que será
+   *                                          mostrado;
+   * @param {String} valorComparacao:  Valor que será comparado com a opção
+   *                                   selecionada. Se forem iguais, o elemento
+   *                                   será mostrado. Caso contrário, será ocultado;
+   * @param {String} operadorComparacao:  "igualdade" - para operador ==
+   *                                      "diferenca" - para operados !=
+   */
+  function mostrarCampo( nameComponenteOrigemEvento,
+                         idElementoASerMostrado,
+                         valorComparacao,
+                         operadorComparacao ) {
+
+    // Reset nos displays dos campos
+    document.getElementById( idElementoASerMostrado ).style.display = "none";
+        
+    // Ids das opcoes selecionadas
+    const opcoesSelecionadas = document.querySelectorAll(`input[name=${nameComponenteOrigemEvento}]:checked`);
+    const arrayIdsOpcoesSelecionadas = Array.from(opcoesSelecionadas).map(chk => chk.value);
+
+    // Se algum checkbox dos tipos de trabalhos tiver sido selecionado
+    if( arrayIdsOpcoesSelecionadas.length ) {
+
+      arrayIdsOpcoesSelecionadas.forEach( item => {
+        
+        switch( operadorComparacao ) {
+
+          case "igualdade":  if(item == valorComparacao) document.getElementById( idElementoASerMostrado ).style.display = "";        
+                     break;
+          case "diferenca":  if(item != valorComparacao) document.getElementById( idElementoASerMostrado ).style.display = "";        
+                     break;          
+        }
+
+      }); 
+    }
+
+  } // Fim da função mostrarCampo  
+
+</script>

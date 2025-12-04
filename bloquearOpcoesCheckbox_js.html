@@ -1,0 +1,63 @@
+<script>
+
+  "use strict";    
+
+
+  /**
+   * Função para bloquear opções no checkbox ( disabled = true ).
+   * Se a opção 1 for selecionada, a função desabilita as outras opções.
+   * Se uma opção diferente de 1 for selecionada, a função desabilita a opção 1.
+   * 
+   * @param {String} nameCheckbox: Atributo name do checkbox
+   */  
+  function bloquearOpcoesCheckbox( nameCheckbox ) {
+
+    // Todas as opções do check box
+    const checkBoxIdsTodasAsOpcoes = document.querySelectorAll(`input[name="${nameCheckbox}"]`);
+
+    // Se o checkbox não tiver opções, retorna string ""
+    if( checkBoxIdsTodasAsOpcoes.length < 1 ) return "";
+
+    // Se o checkbox tiver opções, obtém os values
+    let arrayIdsTodasAsOpcoes = Array.from(checkBoxIdsTodasAsOpcoes).map(op => op.value);
+
+    // Reset na propriedade disabed de todas as opções
+    let idOpcao;
+    arrayIdsTodasAsOpcoes.forEach( value => {
+        idOpcao = nameCheckbox + value;
+        document.getElementById( idOpcao ).disabled = false;
+    });
+
+
+    // Apenas as opções selecionadas do check box
+    const checkBoxIdsOpcoesSelecionadas = document.querySelectorAll(`input[name="${nameCheckbox}"]:checked`);
+
+    // Se algum opção tiver sido selecionada, faz disabled = true
+    // nas opções apropriadas
+    if( checkBoxIdsOpcoesSelecionadas.length > 0 )  {
+
+      // Obtém os values das opções selecionadas
+      let arrayIdsOpcoesSelecionadas = Array.from(checkBoxIdsOpcoesSelecionadas).map(chk => chk.value);
+
+      // Se opção 1 tiver sido selecionada, bloqueia as outras
+      if( arrayIdsOpcoesSelecionadas[0] == "1" ) {
+
+        arrayIdsTodasAsOpcoes.forEach( value => {
+          if( value != "1" ) {
+            idOpcao = nameCheckbox + value;
+            document.getElementById( idOpcao ).disabled = true;
+          }
+        });
+
+      // Se opção diferente de 1 tiver sido selecionada, bloqueia opção 1
+      } else {
+
+ 	      idOpcao = nameCheckbox + "1";
+        document.getElementById( idOpcao ).disabled = true;
+
+      } // Fim if-else
+    } // Fim if
+
+  } // Fim da função bloquearOpcoesCheckbox
+
+</script>
