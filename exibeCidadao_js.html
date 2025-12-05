@@ -4,6 +4,8 @@
   
   function exibeCidadao( caso ) {
       
+      //CPF
+      document.getElementById("input_cpf").value = caso.cpf.trim();
 
       //Data de atualização do CADÚNICO
       document.getElementById("input_dataAtualizacaoCADUnico_beneficiario").value = caso.dataAtualizacaoCadastral.split("/").reverse().join("-");

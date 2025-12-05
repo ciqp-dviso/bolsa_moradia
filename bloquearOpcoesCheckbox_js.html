@@ -9,8 +9,12 @@
    * Se uma opção diferente de 1 for selecionada, a função desabilita a opção 1.
    * 
    * @param {String} nameCheckbox: Atributo name do checkbox
+   * 
+   * @param {String} idOpcaoBlocante: Id da opção que se marcada, bloqueia todas 
+   *                                  as outras opções. Se algumas das outras opções
+   *                                  for marcada, a opção blocante é bloqueada.
    */  
-  function bloquearOpcoesCheckbox( nameCheckbox ) {
+  function bloquearOpcoesCheckbox( nameCheckbox, idOpcaoBlocante ) {
 
     // Todas as opções do check box
     const checkBoxIdsTodasAsOpcoes = document.querySelectorAll(`input[name="${nameCheckbox}"]`);
@@ -28,7 +32,6 @@
         document.getElementById( idOpcao ).disabled = false;
     });
 
-
     // Apenas as opções selecionadas do check box
     const checkBoxIdsOpcoesSelecionadas = document.querySelectorAll(`input[name="${nameCheckbox}"]:checked`);
 
@@ -40,10 +43,10 @@
       let arrayIdsOpcoesSelecionadas = Array.from(checkBoxIdsOpcoesSelecionadas).map(chk => chk.value);
 
       // Se opção 1 tiver sido selecionada, bloqueia as outras
-      if( arrayIdsOpcoesSelecionadas[0] == "1" ) {
+      if( arrayIdsOpcoesSelecionadas[0] == idOpcaoBlocante ) {
 
         arrayIdsTodasAsOpcoes.forEach( value => {
-          if( value != "1" ) {
+          if( value != idOpcaoBlocante ) {
             idOpcao = nameCheckbox + value;
             document.getElementById( idOpcao ).disabled = true;
           }
@@ -52,7 +55,7 @@
       // Se opção diferente de 1 tiver sido selecionada, bloqueia opção 1
       } else {
 
- 	      idOpcao = nameCheckbox + "1";
+ 	      idOpcao = nameCheckbox + idOpcaoBlocante;
         document.getElementById( idOpcao ).disabled = true;
 
       } // Fim if-else

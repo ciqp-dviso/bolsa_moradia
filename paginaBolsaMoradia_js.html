@@ -3,9 +3,15 @@
   "use strict";
 
   /**
+   * Variável para controlar o id dos familiares do beneficiário
+  */
+  let idFamiliar;
+
+  /**
    * Variável para controlar o número de familiares do beneficiário
   */
-  let numeroDeFamiliares;
+  let numeroDeFamiliares;  
+
 
 
 
@@ -34,7 +40,8 @@
     document.getElementById( "termoResponsabilidadeTecnico" ).style.display = "none";    
 
 
-    // Reset no número de familiares
+    // Reset no id e no número de familiares
+    idFamiliar = 0;
     numeroDeFamiliares = 0;
 
   } // Fim da função configurarPaginaBolsaMoradia
@@ -114,6 +121,7 @@
   function adicionarFamiliar() {
     
     // Incrementa o número de familiares do cidadão
+    ++idFamiliar;
     ++numeroDeFamiliares;
 
     // Mostra os campos dos familiares, se houver pelo menos 1 familiar
@@ -122,44 +130,43 @@
     }
     
     // Campos referentes a um familiar
-    let familiar = `
+    let camposFamiliar = `       
 
-        <!-- Familiar ${numeroDeFamiliares} - Início -->
-        <div class="mb-5 p-4 bg-light border rounded-2" id="familiar_${numeroDeFamiliares}">
+          <!-- Familiar ${idFamiliar} - Início -->    
 
           <!-- Dados familiar - Linha 1 -->
           <div class="row mb-1">       
             <div class="col-md-4">
-              <label for="input_nome_familiar_${numeroDeFamiliares}" class="form-label fw-bold">NOME COMPLETO</label>
+              <label for="input_nome_familiar_${idFamiliar}" class="form-label fw-bold">NOME COMPLETO</label>
             </div>              
             <div class="col-md-2">
-              <label for="input_dataNascimento_familiar_${numeroDeFamiliares}" class="form-label fw-bold">DATA DE NASCIMENTO</label>
+              <label for="input_dataNascimento_familiar_${idFamiliar}" class="form-label fw-bold">DATA DE NASCIMENTO</label>
             </div>            
             <div class="col-md-3">
-              <label for="select_parentesco_familiar_${numeroDeFamiliares}" class="form-label fw-bold">PARENTESCO</label>
+              <label for="select_parentesco_familiar_${idFamiliar}" class="form-label fw-bold">PARENTESCO</label>
             </div>                                                 
             <div class="col-md-2">
-              <label for="input_cpf_familiar_${numeroDeFamiliares}" class="form-label fw-bold">CPF</label>
+              <label for="input_cpf_familiar_${idFamiliar}" class="form-label fw-bold">CPF</label>
             </div>                                                                             
             <div class="col-md-1"></div>        
           </div>    
       
           <div class="row mb-5">            
             <div class="col-md-4">
-              <input type="text" class="form-control" id="input_nome_familiar_${numeroDeFamiliares}">
+              <input type="text" class="form-control" id="input_nome_familiar_${idFamiliar}">
             </div>              
             <div class="col-md-2">
-              <input type="date" class="form-control" id="input_dataNascimento_familiar_${numeroDeFamiliares}">
+              <input type="date" class="form-control" id="input_dataNascimento_familiar_${idFamiliar}">
             </div>
             <div class="col-md-3">
-              <select class="form-select" id="select_parentesco_familiar_${numeroDeFamiliares}">
+              <select class="form-select" id="select_parentesco_familiar_${idFamiliar}">
                 <?!= gerarSelect( BUFFER_PARENTESCO ); ?>
               </select>
             </div>   
             <div class="col-md-2">
-              <input type="text" class="form-control" id="input_cpf_familiar_${numeroDeFamiliares}">
+              <input type="text" class="form-control" id="input_cpf_familiar_${idFamiliar}">
             </div>                                                                             
-            <button type="button" class="btn btn-secondary col-md-1" onclick="removerFamiliar('familiar_${numeroDeFamiliares}')">
+            <button type="button" class="btn btn-secondary col-md-1" onclick="removerFamiliar('familiar_${idFamiliar}')">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                 <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
@@ -171,17 +178,17 @@
           <!-- Dados familiar - Linha 2 -->
           <div class="row mb-1">       
             <div class="col-md-2">
-              <label for="select_racaCor_familiar_${numeroDeFamiliares}" class="form-label fw-bold">RAÇA/COR</label>
+              <label for="select_racaCor_familiar_${idFamiliar}" class="form-label fw-bold">RAÇA/COR</label>
             </div>              
             <div class="col-md-2">
-              <label for="select_genero_familiar_${numeroDeFamiliares}" class="form-label fw-bold">GÊNERO</label>
+              <label for="select_genero_familiar_${idFamiliar}" class="form-label fw-bold">GÊNERO</label>
             </div>            
             <div class="col-md-2">
-              <label for="select_orientacaoSexual_familiar_${numeroDeFamiliares}" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
+              <label for="select_orientacaoSexual_familiar_${idFamiliar}" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
             </div>                  
             <div class="col-md-6">
-              <input class="form-check-input border border-secondary rounded-1 me-1" type="checkbox" value="1" id="checkbox_segundaRF_familiar_${numeroDeFamiliares}">              
-              <label class="form-check-label fw-bold" for="checkbox_segundaRF_familiar_${numeroDeFamiliares}">
+              <input class="form-check-input border border-secondary rounded-1 me-1" type="checkbox" value="${idFamiliar}" name="checkbox_segundaRF_familiar" id="checkbox_segundaRF_familiar${idFamiliar}" onchange="bloquearOpcoesCheckbox( 'checkbox_segundaRF_familiar', '${idFamiliar}' )">              
+              <label class="form-check-label fw-bold" for="checkbox_segundaRF_familiar_${idFamiliar}">
                 2ª PESSOA RESPONSÁVEL PELA UNIDADE FAMILIAR - RF
               </label>                      
             </div>                  
@@ -189,17 +196,17 @@
       
           <div class="row mb-5">            
             <div class="col-md-2">
-              <select class="form-select" id="select_racaCor_familiar_${numeroDeFamiliares}">
+              <select class="form-select" id="select_racaCor_familiar_${idFamiliar}">
                 <?!= gerarSelect( BUFFER_RACAS_CORES ); ?>
               </select>
             </div>                          
             <div class="col-md-2">
-              <select class="form-select" id="select_genero_familiar_${numeroDeFamiliares}">
+              <select class="form-select" id="select_genero_familiar_${idFamiliar}">
                 <?!= gerarSelect( BUFFER_IDENTIDADES_DE_GENERO ); ?>
               </select>
             </div>
             <div class="col-md-2">
-              <select class="form-select" id="select_orientacaoSexual_familiar_${numeroDeFamiliares}">
+              <select class="form-select" id="select_orientacaoSexual_familiar_${idFamiliar}">
                 <?!= gerarSelect( BUFFER_ORIENTACOES_SEXUAIS ); ?>
               </select>
             </div>   
@@ -215,20 +222,20 @@
           </div>
           <div class="row mb-5">
             <div class="col-md-5">            
-              <input class="form-control" type="file" id="bt_uploadArquivo_doc_familiar_${numeroDeFamiliares}">
+              <input class="form-control" type="file" id="bt_uploadArquivo_doc_familiar_${idFamiliar}">
             </div>
           </div>          
                     
           <div class="row mb-4">
             <p class="fw-bold">PROBLEMAS DE SAÚDE</p>
-            <div id="radiobutton_problemasSaude_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'problemasSaude_familiar_${numeroDeFamiliares}', 'uploadArquivo_problemasSaude_familiar_${numeroDeFamiliares}', '1', 'diferenca' )">
+            <div id="radiobutton_problemasSaude_familiar_${idFamiliar}" onchange="mostrarCampo( 'problemasSaude_familiar_${idFamiliar}', 'uploadArquivo_problemasSaude_familiar_${idFamiliar}', '1', 'diferenca' )">
               <!-- 1: Radio Button inline   -->
               <!-- 0: Radio Button vertical -->
-              <?!= gerarRadioButton( BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE, "problemasSaude_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarRadioButton( BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE, "problemasSaude_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>
           
-          <div class="mb-5" id="uploadArquivo_problemasSaude_familiar_${numeroDeFamiliares}" style="display: none;">
+          <div class="mb-5" id="uploadArquivo_problemasSaude_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-6">
                 <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O PROBLEMA DE SAÚDE</p>           
@@ -236,7 +243,7 @@
             </div>
             <div class="row">
               <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_problemasSaude_familiar_${numeroDeFamiliares}">
+                <input class="form-control" type="file" id="bt_problemasSaude_familiar_${idFamiliar}">
               </div>
             </div>
           </div>                           
@@ -245,14 +252,14 @@
           <!-- Dados familiar - Linha 5 -->             
           <div class="row mb-4">
             <p class="fw-bold">ESSE FAMILIAR É PCD?</p>
-            <div id="radiobutton_pcd_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'pcd_familiar_${numeroDeFamiliares}', 'uploadArquivo_pcd_familiar_${numeroDeFamiliares}', '2', 'igualdade' )">
+            <div id="radiobutton_pcd_familiar_${idFamiliar}" onchange="mostrarCampo( 'pcd_familiar_${idFamiliar}', 'uploadArquivo_pcd_familiar_${idFamiliar}', '2', 'igualdade' )">
               <!-- 1: Radio Button inline   -->
               <!-- 0: Radio Button vertical -->
-              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "pcd_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "pcd_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>            
     
-          <div class="mb-5" id="uploadArquivo_pcd_familiar_${numeroDeFamiliares}" style="display: none;">
+          <div class="mb-5" id="uploadArquivo_pcd_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-12">
                 <p class="fw-bold">INSIRA A DOCUMENTAÇÃO PCD</p>           
@@ -260,7 +267,7 @@
             </div>
             <div class="row">
               <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_uploadArquivo_pcd_familiar_${numeroDeFamiliares}">
+                <input class="form-control" type="file" id="bt_uploadArquivo_pcd_familiar_${idFamiliar}">
               </div>
             </div>
           </div>                           
@@ -269,10 +276,10 @@
           <!-- Dados familiar - Linha 6 -->             
           <div class="row mb-4">
             <p class="fw-bold">DIAGNÓSTICO DE SOFRIMENTO MENTAL, USO PREJUDICIAL DE ÁLCOOL E DROGAS E/OU DEPENDENTES DE CUIDADOS PARA A VIDA DIÁRIA?</p>
-            <div id="radiobutton_diagnostico_familiar_${numeroDeFamiliares}">
+            <div id="radiobutton_diagnostico_familiar_${idFamiliar}">
               <!-- 1: Radio Button inline   -->
               <!-- 0: Radio Button vertical -->
-              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "diagnostico_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "diagnostico_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>
           
@@ -280,10 +287,10 @@
           <!-- Dados familiar - Linha 7 -->             
           <div class="row mb-4">
             <p class="fw-bold">MULHER EM GESTAÇÃO OU EM FASE DE PUERPÉRIO - ATÉ 6 MESES APÓS GESTAÇÃO?</p>
-            <div id="radiobutton_gestacao_familiar_${numeroDeFamiliares}">
+            <div id="radiobutton_gestacao_familiar_${idFamiliar}">
               <!-- 1: Radio Button inline   -->
               <!-- 0: Radio Button vertical -->
-              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "gestacao_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "gestacao_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>
           
@@ -291,14 +298,14 @@
           <!-- Dados familiar - Linha 8 -->             
           <div class="row mb-4">
             <p class="fw-bold">CRIANÇAS E/OU ADOLESCENTES COM MEDIDA PROTETIVA DE ACOLHIMENTO?</p>
-            <div id="radiobutton_ceaMedidaProtetiva_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'ceaMedidaProtetiva_familiar_${numeroDeFamiliares}', 'uploadArquivo_ceaMedidaProtetiva_familiar_${numeroDeFamiliares}', '2', 'igualdade' )">
+            <div id="radiobutton_ceaMedidaProtetiva_familiar_${idFamiliar}" onchange="mostrarCampo( 'ceaMedidaProtetiva_familiar_${idFamiliar}', 'uploadArquivo_ceaMedidaProtetiva_familiar_${idFamiliar}', '2', 'igualdade' )">
               <!-- 1: Radio Button inline   -->
               <!-- 0: Radio Button vertical -->
-              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaMedidaProtetiva_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaMedidaProtetiva_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>      
     
-          <div class="mb-5" id="uploadArquivo_ceaMedidaProtetiva_familiar_${numeroDeFamiliares}" style="display: none;">
+          <div class="mb-5" id="uploadArquivo_ceaMedidaProtetiva_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-12">
                 <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE A MEDIDA PROTETIVA DE ACOLHIMENTO</p>           
@@ -306,7 +313,7 @@
             </div>
             <div class="row">
               <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_ceaMedidaProtetiva_familiar_${numeroDeFamiliares}">
+                <input class="form-control" type="file" id="bt_ceaMedidaProtetiva_familiar_${idFamiliar}">
               </div>
             </div>
           </div>                           
@@ -315,14 +322,14 @@
           <!-- Dados familiar - Linha 9 -->             
           <div class="row mb-4">
             <p class="fw-bold">CRIANÇAS/ADOLESCENTES EM SITUAÇÃO DE TRABALHO INFANTIL E/OU EXPLORAÇÃO SEXUAL?</p>
-            <div id="radiobutton_ceaTrabalhoExploracao_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'ceaTrabalhoExploracao_familiar_${numeroDeFamiliares}', 'uploadArquivo_ceaTrabalhoExploracao_familiar_${numeroDeFamiliares}', '2', 'igualdade' )">
+            <div id="radiobutton_ceaTrabalhoExploracao_familiar_${idFamiliar}" onchange="mostrarCampo( 'ceaTrabalhoExploracao_familiar_${idFamiliar}', 'uploadArquivo_ceaTrabalhoExploracao_familiar_${idFamiliar}', '2', 'igualdade' )">
               <!-- 1: Radio Button inline   -->
               <!-- 0: Radio Button vertical -->
-              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaTrabalhoExploracao_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaTrabalhoExploracao_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>            
 
-          <div class="mb-5" id="uploadArquivo_ceaTrabalhoExploracao_familiar_${numeroDeFamiliares}" style="display: none;">
+          <div class="mb-5" id="uploadArquivo_ceaTrabalhoExploracao_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-12">
                 <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE A SITUAÇÃO DE TRABALHO INFANTIL E/OU EXPLORAÇÃO SEXUAL</p>           
@@ -330,7 +337,7 @@
             </div>
             <div class="row">
               <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_ceaTrabalhoExploracao_familiar_${numeroDeFamiliares}">
+                <input class="form-control" type="file" id="bt_ceaTrabalhoExploracao_familiar_${idFamiliar}">
               </div>
             </div>
           </div>          
@@ -339,14 +346,14 @@
           <!-- Dados familiar - Linha 10 -->             
           <div class="row mb-4">
             <p class="fw-bold">ESTÁ VINCULADO(A) AO TRABALHO FORMAL?</p>
-            <div id="radiobuton_trabalhoFormal_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'trabalhoFormal_familiar_${numeroDeFamiliares}', 'uploadArquivo_trabalhoFormal_familiar_${numeroDeFamiliares}', '2', 'igualdade' )">
+            <div id="radiobuton_trabalhoFormal_familiar_${idFamiliar}" onchange="mostrarCampo( 'trabalhoFormal_familiar_${idFamiliar}', 'uploadArquivo_trabalhoFormal_familiar_${idFamiliar}', '2', 'igualdade' )">
               <!-- 1: Radio Button inline   -->
               <!-- 0: Radio Button vertical -->
-              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "trabalhoFormal_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "trabalhoFormal_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>                     
           
-          <div class="mb-5" id="uploadArquivo_trabalhoFormal_familiar_${numeroDeFamiliares}" style="display: none;">
+          <div class="mb-5" id="uploadArquivo_trabalhoFormal_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-6">
                 <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O TRABALHO FORMAL</p>           
@@ -354,7 +361,7 @@
             </div>
             <div class="row">
               <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_uploadArquivo_trabalhoFormal_familiar_${numeroDeFamiliares}">
+                <input class="form-control" type="file" id="bt_uploadArquivo_trabalhoFormal_familiar_${idFamiliar}">
               </div>
             </div>
           </div>                           
@@ -363,17 +370,17 @@
           <!-- Dados familiar - Linha 11 -->             
           <div class="row mb-4">
             <p class="fw-bold">ESTÁ VINCULADO(A) AO TRABALHO INFORMAL, GRUPOS PRODUTIVOS, ASSOCIAÇÕES E COOPERATIVAS?</p>
-            <div id="checkbox_trabalhoInformal_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'trabalhoInformal_familiar_${numeroDeFamiliares}', 'descricao_trabalhoInformal_familiar_${numeroDeFamiliares}', '1', 'diferenca' )">
+            <div id="checkbox_trabalhoInformal_familiar_${idFamiliar}" onchange="handlerCheckboxPaginaBM( 'trabalhoInformal_familiar_${idFamiliar}', 'descricao_trabalhoInformal_familiar_${idFamiliar}', '1', 'diferenca' )">
               <!-- 1: checkbox inline   -->
               <!-- 0: checkbox vertical -->
-              <?!= gerarCheckBox( BUFFER_TIPOS_DE_TRABALHO, "trabalhoInformal_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarCheckBox( BUFFER_TIPOS_DE_TRABALHO, "trabalhoInformal_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>                     
           
-          <div class="row mb-5" id="descricao_trabalhoInformal_familiar_${numeroDeFamiliares}" style="display: none;">
+          <div class="row mb-5" id="descricao_trabalhoInformal_familiar_${idFamiliar}" style="display: none;">
             <div class="col-md-10">
-              <label for="textarea_descricao_trabalhoInformal_familiar_${numeroDeFamiliares}" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DO TRABALHO</label>
-              <textarea class="form-control" id="textarea_descricao_trabalhoInformal_familiar_${numeroDeFamiliares}" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
+              <label for="textarea_descricao_trabalhoInformal_familiar_${idFamiliar}" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DO TRABALHO</label>
+              <textarea class="form-control" id="textarea_descricao_trabalhoInformal_familiar_${idFamiliar}" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
             </div>        
           </div>   
     
@@ -381,14 +388,14 @@
           <!-- Dados familiar - Linha 12  -->     
           <div class="row mb-3">
             <p class="fw-bold">É PARTICIPANTE DO PROGRAMA ESTAMOS JUNTOS, SEJA INSERIDO NAS FRENTES DE TRABALHO OU OPORTUNIDADE CLT?</p>
-            <div id="radiobutton_estamosJuntos_familiar_${numeroDeFamiliares}" onchange="mostrarCampo( 'estamosJuntos_familiar_${numeroDeFamiliares}', 'uploadArquivo_estamosJuntos_familiar_${numeroDeFamiliares}', '2', 'igualdade' )">
+            <div id="radiobutton_estamosJuntos_familiar_${idFamiliar}" onchange="mostrarCampo( 'estamosJuntos_familiar_${idFamiliar}', 'uploadArquivo_estamosJuntos_familiar_${idFamiliar}', '2', 'igualdade' )">
               <!-- 1: Radio Button inline   -->
               <!-- 0: Radio Button vertical -->
-              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "estamosJuntos_familiar_${numeroDeFamiliares}", 0 ); ?>
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "estamosJuntos_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>      
             
-          <div class="mb-5" id="uploadArquivo_estamosJuntos_familiar_${numeroDeFamiliares}" style="display: none;">
+          <div class="mb-5" id="uploadArquivo_estamosJuntos_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-12">
                 <p class="fw-bold">INSIRA A DECLARAÇÃO DA SUTE (Subsecretaria de Trabalho e Emprego) SOBRE A PARTICIPAÇÃO NO PROGRAMA ESTAMOS JUNTOS</p>           
@@ -396,19 +403,32 @@
             </div>
             <div class="row">
               <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_uploadArquivo_estamosJuntos_familiar_${numeroDeFamiliares}">
+                <input class="form-control" type="file" id="bt_uploadArquivo_estamosJuntos_familiar_${idFamiliar}">
               </div>
             </div>
           </div>            
 
-        </div>        
-        <!-- Familiar - Fim -->    
+          <!-- Familiar ${idFamiliar} - Fim -->    
 
     `;
 
-    // Adiciona uma linha com campos referentes a um familiar
-    document.getElementById("familiares").innerHTML += familiar;
+    // Cria o elemento filho e adiciona os campos do novo familiar ao seu innerHTML
+    let elementoNovoFamiliar = document.createElement( "div" );
+    elementoNovoFamiliar.id = `familiar_${idFamiliar}`;
+    elementoNovoFamiliar.classList = "mb-5 p-4 bg-light border rounded-2";
+    elementoNovoFamiliar.innerHTML = camposFamiliar;
 
+    // Append do novo elemento filho ao elemento pai, que contém os familiares
+    let elementoFamiliares = document.getElementById("familiares");
+    elementoFamiliares.appendChild( elementoNovoFamiliar );
+
+
+    // Se outro familiar já estiver marcado como segundo RF, não permite
+    // que esse novo familiar seja selecionado também com segunda RF
+    if( document.querySelectorAll(`input[name="checkbox_segundaRF_familiar"]:checked`).length > 0 ) {      
+      document.getElementById(`checkbox_segundaRF_familiar${idFamiliar}`).disabled = true;
+    }    
+ 
   } // Fim da função adicionarFamiliar
 
 
@@ -417,8 +437,21 @@
    * Função para remover um familiar
    */
   function removerFamiliar( id ) {
-   
-    // Obtém o elemento pelo ID
+
+    // Se esse familiar sendo removido estiver marcado como segunda RF, 
+    // o desmarca, e em seguida desbloqueia os outros familiares para
+    // serem selecionados como segunda RF   
+    let numeroID = id.split("_")[1];
+    let idCheckboxSegundaRF = "checkbox_segundaRF_familiar" + numeroID;
+    let checkboxSegundaRF = document.getElementById( idCheckboxSegundaRF );
+
+    if( checkboxSegundaRF.checked == true ) {
+      checkboxSegundaRF.checked = false;
+      bloquearOpcoesCheckbox( "checkbox_segundaRF_familiar", numeroID );      
+    }    
+    
+
+    // Obtém o elemento contendo os dados do familiar pelo ID
     let elemento = document.getElementById( id );
 
     // Remove o elemento contendo os campos do familiar
@@ -465,7 +498,7 @@
     // Chama a função bloquearOpcoesCheckbox, que bloqueia / desbloqueia 
     // campos ( disabled = true ), dependendo da opção selecionada no 
     // checkbox                 
-    bloquearOpcoesCheckbox( nameComponenteOrigemEvento );                
+    bloquearOpcoesCheckbox( nameComponenteOrigemEvento, valorComparacao );                
 
   } // Fim da função mostrarCampo    
 

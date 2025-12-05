@@ -51,7 +51,7 @@
 
       <div class="row">
         <div class="col-md-5">          
-          <input class="form-control" type="file" id="bt_upload_folhaResumo_beneficiario">
+          <input class="form-control" type="file" id="bt_uploadArquivo_folhaResumo_beneficiario">
         </div>
       </div>           
              
@@ -441,7 +441,7 @@
       <!-- Dados beneficiário - Linha 12 -->             
       <div class="row mb-4">
         <p class="fw-bold">A PESSOA CANDIDATA TEM HISTÓRICO DE INSTITUCIONALIZAÇÃO?</p>
-        <div id="checkbox_institucionalizacao_beneficiario">
+        <div id="checkbox_institucionalizacao_beneficiario" onchange="bloquearOpcoesCheckbox( 'institucionalizacao_beneficiario', '1' )">
           <!-- 1: checkbox inline   -->
           <!-- 0: checkbox vertical -->
           <?!= gerarCheckBox( BUFFER_HISTORICO_INSTITUCIONALIZACAO, "institucionalizacao_beneficiario", 0 ); ?>
@@ -452,12 +452,25 @@
       <!-- Dados beneficiário - Linha 13 -->             
       <div class="row mb-4">
         <p class="fw-bold">A PESSOA CANDIDATA AO BENEFÍCIO POSSUI ALGUMA DAS CONDIÇÕES DE SAÚDE LISTADAS ABAIXO?</p>
-        <div id="checkbox_saude_beneficiario">
+        <div id="checkbox_saude_beneficiario"  onchange="handlerCheckboxPaginaBM( 'saude_beneficiario', 'uploadArquivo_saude_beneficiario', '1', 'diferenca' )">
           <!-- 1: checkbox inline   -->
           <!-- 0: checkbox vertical -->
           <?!= gerarCheckBox( BUFFER_CONDICOES_SAUDE, "saude_beneficiario", 0 ); ?>
         </div>    
       </div>      
+
+      <div class="mb-5" id="uploadArquivo_saude_beneficiario" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-12">
+            <p class="fw-bold">INSIRA A DOCUMENTAÇÃO SOBRE AS CONDIÇÕES DE SAÚDE</p>           
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">            
+            <input class="form-control" type="file" id="bt_uploadArquivo_saude_beneficiario">
+          </div>
+        </div>
+      </div>                  
 
 
       <!-- Dados beneficiário - Linha 14 -->
