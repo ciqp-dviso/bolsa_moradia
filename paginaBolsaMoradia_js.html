@@ -5,13 +5,12 @@
   /**
    * Variável para controlar o id dos familiares do beneficiário
   */
-  let idFamiliar;
+  let idFamiliar = 0;
 
   /**
    * Variável para controlar o número de familiares do beneficiário
   */
-  let numeroDeFamiliares;  
-
+  let numeroDeFamiliares = 0;  
 
 
 
@@ -34,7 +33,7 @@
 
     document.getElementById( "bt_addFamiliar" ).style.display = "none";    
 
-    document.getElementById( "informacoes_adicionais_beneficiario" ).style.display = "none";        
+    document.getElementById( "informacoes_adicionais" ).style.display = "none";        
 
     document.getElementById( "assinatura_beneficiario" ).style.display = "none";    
     document.getElementById( "termoResponsabilidadeTecnico" ).style.display = "none";    
@@ -44,7 +43,50 @@
     idFamiliar = 0;
     numeroDeFamiliares = 0;
 
+    console.log( "\nconfigurarPaginaBolsaMoradia: " + numeroDeFamiliares + "\n" );
+
+    // Zera o campo Número de familiares
+    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares;
+
   } // Fim da função configurarPaginaBolsaMoradia
+
+
+
+  /**
+   * Função para tratar evento onBlur campos de CPF. Ela chama a função
+   * validar CPF, passando o CPF como parâmetro
+   * 
+   * @param {Sting} idCampoCPF: O ID do campo CPF
+   *    
+   * return: false - se o CPF for inválido
+   *         O CPF formatado - se o CPF for válido
+   */
+  function handlerCampoCPF( idCampoCPF ) {
+
+    // Obtém o CPF preenchido no campo
+    let cpf = document.getElementById( idCampoCPF ).value;
+
+    // Se campo CPF vazio, mostra modal erro e retorna false      
+    if( cpf == "" ) {   
+      mostrarModalErro( "Campo CPF é obrigatório!" );
+      return false;
+    } 
+
+    // Chama a função para validar CPF
+    let cpfValidado = validarCPF( cpf );     
+
+    // Se CPF válido, o retorna, formatado.
+    if( cpfValidado ) {
+
+      return cpfValidado;
+
+    // Se CPF invãlido, mostra modal erro e retorna false      
+    } else {   
+      mostrarModalErro( "CPF inválido!" );      
+      return false;
+    } 
+
+  } // Fim da função handlerCampoCPF     
 
 
 
@@ -59,6 +101,11 @@
     // Leitura do campo CPF
     let cpf = document.getElementById( "input_cpf" ).value;
 
+    if( cpf == "" ) {   
+      mostrarModalErro( "Campo CPF é obrigatório!" );
+      return false;
+    } 
+
     // Validação do CPF informado
     let cpfValidado = validarCPF( cpf );
 
@@ -71,47 +118,103 @@
       // Pesquisa pelo CPF na base do Cad Único
       pesquisaCidadaoFE( cpfValidado );
 
-    } // Fim da validação de RF           
+      return true;
+
+    } else {     
+
+      mostrarModalErro( "CPF inválido!" );      
+      return false;
+
+    }// Fim da validação de RF           
 
   } // Fim da função handlerBotaoPesquisaCidadao
 
 
 
-  /**
-   * Função para validar o CPF informado pelo usuário
+/**
+   * Função para tratar evento onChange nos checkbox da página Bolsa Moradia.
+   * Ela chama as funções mostrarCampo e bloquearOpcoesCheckbox.
+   * 
+   * @param {String} nameComponenteOrigemEvento: Atributo name do elemento html onde
+   *                                             o evento ocorreu;
+   * @param {String} idElementoASerMostrado:  Atributo id do elemento html que será
+   *                                          mostrado;
+   * @param {String} valorComparacao:  Valor que será comparado com a opção
+   *                                   selecionada. Se forem iguais, o elemento
+   *                                   será mostrado. Caso contrário, será ocultado;
+   * @param {String} operadorComparacao:  "igualdade" - para operador ==
+   *                                      "diferenca" - para operados !=
    */
-  function validarCPF( cpf ) {
-    
-    // Testa se o CPF foi informado
-    if( cpf == "" ) {   
-      mostrarModalErro( "Campo CPF é obrigatório!" );
-      return false;
-    } 
+  function handlerCheckboxPaginaBM( nameComponenteOrigemEvento,
+                                    idElementoASerMostrado,
+                                    valorComparacao,
+                                    operadorComparacao ) {
 
-    // Testa se foram informados os onze dígitos do CPF
-    let caracteresCPF = cpf.split("");    
-    let numDigitos = 0;
+    // Chama a função mostrarCampo, que mostra / esconde campos 
+    // ocultos ( display = "none" ), dependendo da opção selecionada
+    mostrarCampo( nameComponenteOrigemEvento,
+                  idElementoASerMostrado,
+                  valorComparacao,
+                  operadorComparacao );
 
-    let cpfProcessado = [];
-    let digito;
+    // Chama a função bloquearOpcoesCheckbox, que bloqueia / desbloqueia 
+    // campos ( disabled = true ), dependendo da opção selecionada no 
+    // checkbox                 
+    bloquearOpcoesCheckbox( nameComponenteOrigemEvento, valorComparacao );                
 
-    caracteresCPF.forEach( item => {
+  } // Fim da função handlerCheckboxPaginaBM   
 
-      digito = parseInt(item);
-      if( !isNaN( digito ) ) {
-        ++numDigitos;
-        cpfProcessado.push( digito );
+
+
+  /**
+   * Handler para tratar o evento onBlur no camp data  
+   * de nascimento do familiar. Ele basicamente, mostra
+   * os campos referentes à C&A apenas para cidadãos
+   * com menos de 18 anos.
+   * 
+   * @param {String} O id do elemento que contém os dados fo Familiar
+   */
+  function handlerDataNascimentoFamiliar( idElementoFamiliar ) {
+
+    // Leitura da data de nascimento do familiar    
+    let id_input_dataNascimento = "input_dataNascimento_" + idElementoFamiliar;  
+    let dataNascimento_input = document.getElementById( id_input_dataNascimento ).value;
+
+    console.log( "\nVALUE DN: " + dataNascimento_input );
+
+    if( dataNascimento_input != "" ) {
+
+      // CAMPO DATA DE NASCIMENTO
+      let auxDataNascimento = dataNascimento_input.split( "-" );
+      let dataNascimento = new Date( auxDataNascimento[0] - 1,   // Ano
+                                     auxDataNascimento[1] - 1,   // Mês
+                                     auxDataNascimento[2] - 1 ); // Dia
+
+
+      console.log( "\nData de Nascimento: " + dataNascimento );
+      console.log( "Dia do Nascimento: " + dataNascimento.getDay() );
+      console.log( "Date do Nascimento: " + dataNascimento.getDate() );
+      console.log( "Mês do Nascimento: " + dataNascimento.getMonth() );
+      console.log( "Ano do Nascimento: " + dataNascimento.getFullYear() );
+      
+
+      // DATA MAIORIDADE
+
+      let dataMaioridade = new Date();      
+      dataMaioridade.setFullYear( dataMaioridade.getFullYear() - 18 );
+      console.log( "\nData Atual - 18: " + dataMaioridade );      
+      
+      // Teste maioridade
+      if( dataNascimento.getTime() <= dataMaioridade.getTime() )  {
+        console.log( "\nMAIOR" );
+      } else {
+        console.log( "\nMENOR" );
       }
-    });
-
-    if( numDigitos == 11 ) {
-      return cpfProcessado.join("");
-    } else {
-      mostrarModalErro( "CPF inválido!" );      
-      return false;
+      
     }
 
-  } // Fim da função validarCPF
+
+  } // Fim da função handlerDataNascimentoFamiliar
 
 
 
@@ -123,6 +226,8 @@
     // Incrementa o número de familiares do cidadão
     ++idFamiliar;
     ++numeroDeFamiliares;
+
+    console.log( "\nadicionarFamiliar: " + numeroDeFamiliares + "\n" );    
 
     // Mostra os campos dos familiares, se houver pelo menos 1 familiar
     if( numeroDeFamiliares == 1 ) {
@@ -156,7 +261,8 @@
               <input type="text" class="form-control" id="input_nome_familiar_${idFamiliar}">
             </div>              
             <div class="col-md-2">
-              <input type="date" class="form-control" id="input_dataNascimento_familiar_${idFamiliar}">
+              <input type="date" class="form-control" id="input_dataNascimento_familiar_${idFamiliar}" 
+                                                      onBlur="handlerDataNascimentoFamiliar( 'familiar_${idFamiliar}' )">
             </div>
             <div class="col-md-3">
               <select class="form-select" id="select_parentesco_familiar_${idFamiliar}">
@@ -422,6 +528,9 @@
     let elementoFamiliares = document.getElementById("familiares");
     elementoFamiliares.appendChild( elementoNovoFamiliar );
 
+    // Atualiza o campo Número de familiares
+    console.log( "\nadicionarFamiliar: " + numeroDeFamiliares + "\n" );    
+    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares;   
 
     // Se outro familiar já estiver marcado como segundo RF, não permite
     // que esse novo familiar seja selecionado também com segunda RF
@@ -460,47 +569,16 @@
     // Decrementa o número de familiares do cidadão
     --numeroDeFamiliares;      
   
+    // Atualiza o campo Número de familiares
+    console.log( "\nremoverFamiliar: " + numeroDeFamiliares + "\n" );    
+    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares;   
+
     // Esconde os campos dos familiares, se não houver mais familiares na lista
     if( numeroDeFamiliares == 0 ) {
       document.getElementById( "dadosFamilia" ).style.display = "none";    
-    }
+    }   
 
-  } // Fim da função removerFamiliar
-
-
-
-/**
-   * Função para tratar evento onChange nos checkbox da página Bolsa Moradia.
-   * Ela chama as funções mostrarCampo e bloquearOpcoesCheckbox.
-   * 
-   * @param {String} nameComponenteOrigemEvento: Atributo name do elemento html onde
-   *                                             o evento ocorreu;
-   * @param {String} idElementoASerMostrado:  Atributo id do elemento html que será
-   *                                          mostrado;
-   * @param {String} valorComparacao:  Valor que será comparado com a opção
-   *                                   selecionada. Se forem iguais, o elemento
-   *                                   será mostrado. Caso contrário, será ocultado;
-   * @param {String} operadorComparacao:  "igualdade" - para operador ==
-   *                                      "diferenca" - para operados !=
-   */
-  function handlerCheckboxPaginaBM( nameComponenteOrigemEvento,
-                                    idElementoASerMostrado,
-                                    valorComparacao,
-                                    operadorComparacao ) {
-
-    // Chama a função mostrarCampo, que mostra / esconde campos 
-    // ocultos ( display = "none" ), dependendo da opção selecionada
-    mostrarCampo( nameComponenteOrigemEvento,
-                  idElementoASerMostrado,
-                  valorComparacao,
-                  operadorComparacao );
-
-    // Chama a função bloquearOpcoesCheckbox, que bloqueia / desbloqueia 
-    // campos ( disabled = true ), dependendo da opção selecionada no 
-    // checkbox                 
-    bloquearOpcoesCheckbox( nameComponenteOrigemEvento, valorComparacao );                
-
-  } // Fim da função mostrarCampo    
+  } // Fim da função removerFamiliar 
 
 
 

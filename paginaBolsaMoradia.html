@@ -17,7 +17,7 @@
 
     <!-- Cabeçalho -->
     <section class="row justify-content-md-center mt-5 mb-5">
-      <h2 class="text-center col col-12 fw-bold" id="tituloPagina">BOLSA MORADIA - FORMULÁRIO DE ENCAMINHAMENTO</h2>    
+      <h2 class="text-center col col-12 fw-bold" id="tituloPagina">BOLSA MORADIA - FORMULÁRIO DE ENCAMINHAMENTO - <span style="color: red;">DEV RUY</span></h2>    
     </section>
 
     <br><br>          
@@ -50,11 +50,15 @@
       </div>
 
       <div class="row">
-        <div class="col-md-5">          
-          <input class="form-control" type="file" id="bt_uploadArquivo_folhaResumo_beneficiario">
+        <div class="col-auto">
+          <div class="input-group">
+            <input class="form-control form-control-sm" type="file" accept=".pdf" id="file1" name="file1" />
+            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)" style="cursor:pointer;">
+              <i class="bi bi-upload"></i>
+            </button>
+          </div>
         </div>
-      </div>           
-             
+      </div>    
     </section>
         
     
@@ -131,7 +135,7 @@
         <div class="col-md-2"></div>
 
         <div class="col-md-1">
-          <input type="text" class="form-control" id="input_numeroDeFamiliares_beneficiario">
+          <input type="text" class="form-control" id="input_numeroDeFamiliares_beneficiario"  placeholder="0" disabled>
         </div>                          
         <div class="col-md-3"></div>
 
@@ -152,7 +156,7 @@
       </div>    
       <div class="row mb-5">            
         <div class="col-md-2">
-          <input class="form-check-input border rounded-2 me-1" type="checkbox" value="1" id="checkbox_condicoesMinimas_beneficiario">
+          <input class="form-check-input border border-secondary rounded-1 me-1" type="checkbox" value="1" id="checkbox_condicoesMinimas_beneficiario">
           <label class="form-check-label fw-bold" for="checkbox_condicoesMinimas_beneficiario">Afirmo que sim</label>        
         </div>      
       </div>          
@@ -318,12 +322,18 @@
         <div class="col-md-12">
           <p>Caso o usuário não esteja com a documentação regularizada, ele deverá estar ciente de que, após a convocação, deverá apresentá-la obrigatoriamente no ato do cadastro na Urbel. </p>           
         </div>
-      </div>      
-      <div class="row mb-5">
-        <div class="col-md-5">            
-          <input class="form-control" type="file" id="bt_uploadArquivo_doc_beneficiario">
+      </div>    
+        
+      <div class="col-md-4 mt-3 mb-4">
+        <div class="input-group">
+          <input class="form-control" type="file" accept=".pdf" id="file2" name="file2" />
+          <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+            style="cursor:pointer;">
+            <i class="bi bi-upload"></i>
+          </button>
         </div>
-      </div>       
+      </div>        
+     
 
 
       <!-- Dados beneficiário - Linha 6 -->             
@@ -342,11 +352,17 @@
             <p class="fw-bold">INSIRA A DOCUMENTAÇÃO PCD</p>           
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5">            
-            <input class="form-control" type="file" id="bt_uploadArquivo_pcd_beneficiario">
+
+        <div class="col-md-4 mb-3 my-3">
+          <div class="input-group">
+            <input class="form-control" type="file" accept=".pdf" id="file3" name="file3" />
+            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+              style="cursor:pointer;">
+              <i class="bi bi-upload"></i>
+            </button>
           </div>
-        </div>
+        </div>  
+
       </div>                  
       
 
@@ -388,11 +404,17 @@
             <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O TRABALHO FORMAL</p>           
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5">            
-            <input class="form-control" type="file" id="bt_uploadArquivo_trabalhoFormal_beneficiario">
+
+        <div class="col-md-4 mb-3 my-3">
+          <div class="input-group">
+            <input class="form-control" type="file" accept=".pdf" id="file4" name="file4" />
+            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+              style="cursor:pointer;">
+              <i class="bi bi-upload"></i>
+            </button>
           </div>
         </div>
+
       </div>                           
 
       
@@ -430,11 +452,17 @@
             <p class="fw-bold">INSIRA A DECLARAÇÃO DA SUTE (Subsecretaria de Trabalho e Emprego) SOBRE A PARTICIPAÇÃO NO PROGRAMA ESTAMOS JUNTOS</p>           
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5">            
-            <input class="form-control" type="file" id="bt_uploadArquivo_estamosJuntos_beneficiario">
+
+        <div class="col-md-4 mb-3 my-3">
+          <div class="input-group">
+            <input class="form-control" type="file" accept=".pdf" id="file5" name="file5" />
+            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+              style="cursor:pointer;">
+              <i class="bi bi-upload"></i>
+            </button>
           </div>
-        </div>
+        </div> 
+
       </div>                           
 
                         
@@ -465,41 +493,18 @@
             <p class="fw-bold">INSIRA A DOCUMENTAÇÃO SOBRE AS CONDIÇÕES DE SAÚDE</p>           
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5">            
-            <input class="form-control" type="file" id="bt_uploadArquivo_saude_beneficiario">
+
+        <div class="col-md-4 mb-3 my-3">
+          <div class="input-group">
+            <input class="form-control" type="file" accept=".pdf" id="file6" name="file6" />
+            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+              style="cursor:pointer;">
+              <i class="bi bi-upload"></i>
+            </button>
           </div>
         </div>
+
       </div>                  
-
-
-      <!-- Dados beneficiário - Linha 14 -->
-      <div class="row mb-4">
-        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, HÁ INDIVÍDUOS EM SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS?</p>
-        <div id="checkbox_violenciasFamiliares_beneficiario" onchange="handlerCheckboxPaginaBM( 'violenciasFamiliares', 'descricaoViolenciasFamiliares_beneficiario', '1', 'diferenca' )">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
-          <?!= gerarCheckBox( BUFFER_VIOLENCIAS, "violenciasFamiliares", 0 ); ?>
-        </div>    
-      </div>    
-
-      <div class="row mb-4" id="descricaoViolenciasFamiliares_beneficiario" style="display: none;">
-        <div class="col-md-10">
-          <label for="textarea_descricaoViolenciasFamiliares_beneficiario" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DA SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS</label>
-          <textarea class="form-control" id="textarea_descricaoViolenciasFamiliares_beneficiario" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
-        </div>        
-      </div>   
-
-
-      <!-- Dados beneficiário - Linha 15 -->
-      <div class="row mb-4">
-        <p class="fw-bold">O(A) BENEFICIÁRIO(A) OU ALGUÉM DA FAMÍLIA ESTÁ EM SITUAÇÃO DE PROSTITUIÇÃO?</p>
-        <div id="radiobutton_prostituicaoFamiliares_beneficiario">
-          <!-- 1: Radio Button inline   -->
-          <!-- 0: Radio Button vertical -->
-          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "prostituicaoFamiliares_beneficiario", 0 ); ?>
-        </div>    
-      </div>                       
 
 
       <br><hr><br>
@@ -529,10 +534,40 @@
 
 
     <!-- Informações adicionais -->
-    <section id="informacoes_adicionais_beneficiario">    
+    <section id="informacoes_adicionais">    
 
       <br><hr><br>
 
+      <!-- Dados adicionais - Linha 1 -->
+      <div class="row mb-4">
+        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, HÁ INDIVÍDUOS EM SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS?</p>
+        <div id="checkbox_violenciasFamiliares_familia" onchange="handlerCheckboxPaginaBM( 'violenciasFamiliares', 'descricaoViolenciasFamiliares_familia', '1', 'diferenca' )">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_VIOLENCIAS, "violenciasFamiliares", 0 ); ?>
+        </div>    
+      </div>    
+
+      <div class="row mb-4" id="descricaoViolenciasFamiliares_familia" style="display: none;">
+        <div class="col-md-10">
+          <label for="textarea_descricaoViolenciasFamiliares_familia" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DA SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS</label>
+          <textarea class="form-control" id="textarea_descricaoViolenciasFamiliares_familia" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
+        </div>        
+      </div>   
+
+
+      <!-- Dados adicionais - Linha 2 -->
+      <div class="row mb-4">
+        <p class="fw-bold">O(A) BENEFICIÁRIO(A) OU ALGUÉM DA FAMÍLIA ESTÁ EM SITUAÇÃO DE PROSTITUIÇÃO?</p>
+        <div id="radiobutton_prostituicaoFamiliares_familia">
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
+          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "prostituicaoFamiliares_familia", 0 ); ?>
+        </div>    
+      </div>                       
+
+
+      <!-- Dados adicionais - Linha 3 -->
       <div class="row mb-1">
         <div class="col-md-12">
           <p class="fw-bold">INFORMAÇÕES TÉCNICAS ADICIONAIS</p>           
@@ -563,11 +598,15 @@
         </div>
       </div>
 
-      <div class="row mb-4">
-        <div class="col-md-5">          
-          <input class="form-control" type="file" id="bt_upload_assinatura_beneficiario">
-        </div>
-      </div>      
+        <div class="col-md-4 mb-3 my-3">
+          <div class="input-group">
+            <input class="form-control" type="file" accept=".pdf" id="file7" name="file7" />
+            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+              style="cursor:pointer;">
+              <i class="bi bi-upload"></i>
+            </button>
+          </div>
+        </div>       
       
       <br><hr><br>
              
@@ -636,7 +675,7 @@
 
       <div class="row justify-content-md-center">            
         <div class="col-md-2">
-          <input class="form-check-input border rounded-2 me-1" type="checkbox" value="1" id="checkbox_termoResponsabilidadeTecnico">
+          <input class="form-check-input border border-secondary rounded-1 me-1" type="checkbox" value="1" id="checkbox_termoResponsabilidadeTecnico">
           <label class="form-check-label fw-bold" for="checkbox_termoResponsabilidadeTecnico">De acordo</label>        
         </div>      
       </div>              

@@ -1,0 +1,91 @@
+<script>
+
+  function importarArquivo(botaoSubmit){
+
+    let nomeBeneficiario = document.getElementById("input_nome_beneficiario").value;
+    const cpfBeneficiario = document.getElementById("input_cpf").value;
+    const nomeSocial = document.getElementById("input_nomeSocial_beneficiario").value;
+
+  
+
+    //const modalImportacaoElement = document.getElementById("modalImportacao"); // Seleciona o modal "modalImportacao" no HTML
+    //const modalImportacao = bootstrap.Modal.getInstance(modalImportacaoElement) || new bootstrap.Modal(modalImportacaoElement);
+  
+    //modalImportacao.hide();
+
+    if (nomeSocial){
+      nomeBeneficiario = nomeSocial;
+    }
+
+    const mapearBotoes = {
+    file1 : "folhaResumoBeneficiario",
+    file2 : "docCPFBeneficiario",
+    file3 : "pcdBeneficiario",
+    file4 : "trabalhoFormal",
+    file5 : "declaracaoDaSute",
+    file6 : "saudeBeneficiario",
+    file7 : "assinaturaBeneficiario" 
+    }
+
+    //Pegar o primeiro "input" e escolhe o input 
+    const fileInput = botaoSubmit.closest(".input-group").querySelector("input[type='file']");
+ 
+    //const destino = mapearBotoes[fileInput.id]
+    //console.log(destino)
+
+    botaoSubmit.disabled = true;
+
+    //Pega o primeiro arquivo selecionado
+    const file = fileInput.files[0];
+
+    const limFile = 10000 * 1024;
+  
+    if (!file) {
+      alert("Nenhum arquivo selecionado!");
+      botaoSubmit.disabled = false;
+      return;
+    }
+
+    if (file.size > limFile){
+      alert("O arquivo excede o tamanho limite de 10Mb.");
+      botaoSubmit.disabled = false;
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      const base64File = reader.result.split(",")[1];
+      const obj = {
+        fileName: file.name,
+        mimeType: file.type,
+        data: base64File
+      };
+      //const nome = "Ana";
+      //const cpf = "123456789-19";
+      
+      console.log(nomeBeneficiario);
+
+      google.script.run
+        .withSuccessHandler(function(response) {
+          if (response.status === "success") {
+
+            //document.querySelector("#modalSucesso .text-muted").innerText = response.message;
+            //var modalSucesso = new bootstrap.Modal(document.getElementById("modalSucesso"));
+            //modalSucesso.show();
+          } else {
+            document.getElementById("modalErro").innerText = response.message;
+            modalErro.show();
+          }
+          botaoSubmit.disabled = false;
+          fileInput.value = "";
+        })
+        .withFailureHandler(function(error) {
+          alert("Erro ao salvar arquivo: " + error.message);
+          botaoSubmit.disabled = false;
+        })
+        .adicionarArquivo(obj, nomeBeneficiario, cpfBeneficiario);
+    };
+
+    reader.readAsDataURL(file);
+  }
+</script>   

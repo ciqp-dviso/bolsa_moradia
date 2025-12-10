@@ -1,0 +1,55 @@
+
+<script>
+
+  "use strict";
+
+
+  /**
+   * Função para validar o CPF passado com parâmetro.
+   * 
+   * @{String} cpf - O CPF passado com parâmetro
+   * 
+   * return: false - se o CPF for inválido
+   *         O CPF formatado - se o CPF for válido
+   */
+  function validarCPF( cpf ) {
+    
+    // Se nulo, retorna false
+    if( cpf == "" ) {   
+      return false;
+    } 
+
+    // Testa se foram informados os onze dígitos do CPF,
+    // mesmo se tiver outros caracteres entre os números
+    // do CPF
+
+    let caracteresCPF = cpf.split("");    
+    let numDigitos = 0;
+
+    let cpfProcessado = [];
+    let digito;
+
+    caracteresCPF.forEach( item => {
+
+      digito = parseInt(item);
+      if( !isNaN( digito ) ) {
+        ++numDigitos;
+        cpfProcessado.push( digito );
+      }
+    });
+
+    // Se CPF tem 11 números, retorna o CPF formatado
+    if( numDigitos == 11 ) {
+      
+      return cpfProcessado.join("");
+
+    // Se não, retorna false
+    } else {      
+      return false;
+    }
+
+  } // Fim da função validarCPF
+
+
+</script>
+
