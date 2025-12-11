@@ -524,7 +524,7 @@
     elementoFamiliares.appendChild( elementoNovoFamiliar );
 
     // Atualiza o campo Número de familiares
-    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares;   
+    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares + 1;   
 
     // Se outro familiar já estiver marcado como segundo RF, não permite
     // que esse novo familiar seja selecionado também com segunda RF
@@ -564,7 +564,7 @@
     --numeroDeFamiliares;      
   
     // Atualiza o campo Número de familiares    
-    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares; 
+    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares + 1; 
     
     // Esconde os campos dos familiares, se não houver mais familiares na lista
     if( numeroDeFamiliares == 0 ) {
