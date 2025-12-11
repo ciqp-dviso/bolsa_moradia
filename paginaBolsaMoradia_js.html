@@ -38,15 +38,12 @@
     document.getElementById( "assinatura_beneficiario" ).style.display = "none";    
     document.getElementById( "termoResponsabilidadeTecnico" ).style.display = "none";    
 
-
     // Reset no id e no número de familiares
     idFamiliar = 0;
     numeroDeFamiliares = 0;
 
-    console.log( "\nconfigurarPaginaBolsaMoradia: " + numeroDeFamiliares + "\n" );
-
     // Zera o campo Número de familiares
-    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares;
+    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = 0;
 
   } // Fim da função configurarPaginaBolsaMoradia
 
@@ -226,8 +223,6 @@
     // Incrementa o número de familiares do cidadão
     ++idFamiliar;
     ++numeroDeFamiliares;
-
-    console.log( "\nadicionarFamiliar: " + numeroDeFamiliares + "\n" );    
 
     // Mostra os campos dos familiares, se houver pelo menos 1 familiar
     if( numeroDeFamiliares == 1 ) {
@@ -529,7 +524,6 @@
     elementoFamiliares.appendChild( elementoNovoFamiliar );
 
     // Atualiza o campo Número de familiares
-    console.log( "\nadicionarFamiliar: " + numeroDeFamiliares + "\n" );    
     document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares;   
 
     // Se outro familiar já estiver marcado como segundo RF, não permite
@@ -569,10 +563,9 @@
     // Decrementa o número de familiares do cidadão
     --numeroDeFamiliares;      
   
-    // Atualiza o campo Número de familiares
-    console.log( "\nremoverFamiliar: " + numeroDeFamiliares + "\n" );    
-    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares;   
-
+    // Atualiza o campo Número de familiares    
+    document.getElementById( "input_numeroDeFamiliares_beneficiario" ).value = numeroDeFamiliares; 
+    
     // Esconde os campos dos familiares, se não houver mais familiares na lista
     if( numeroDeFamiliares == 0 ) {
       document.getElementById( "dadosFamilia" ).style.display = "none";    
