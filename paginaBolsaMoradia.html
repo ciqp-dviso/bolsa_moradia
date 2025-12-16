@@ -17,7 +17,7 @@
 
     <!-- Cabeçalho -->
     <section class="row justify-content-md-center mt-5 mb-5">
-      <h2 class="text-center col col-12 fw-bold" id="tituloPagina">BOLSA MORADIA - FORMULÁRIO DE ENCAMINHAMENTO</h2>    
+      <h2 class="text-center col col-12 fw-bold" id="tituloPagina">BOLSA MORADIA - FORMULÁRIO DE ENCAMINHAMENTO - <span style="color: red;">DEV</span></h2>    
     </section>
 
     <br><br>          
@@ -40,7 +40,7 @@
 
       <div class="row mb-4">
         A pessoa pesquisada ou não foi localizada na base do CADÚNICO de Setembro/25 ou foi localizada, porém
-        possuem em seu registro informações que descumprem os critérios de elegibilidade. Nesse caso é recomendado que seja
+        possui em seu registro informações que descumprem os critérios de elegibilidade. Nesse caso é recomendado que seja
         realizada consulta ao CADÚNICO e verificado:<br/>
         1) O cadastro é da cidade de Belo Horizonte;<br/>
         2) O cadastro tem menos de 2 anos da última atualização; <br/>
@@ -107,7 +107,7 @@
       <!-- Dados do CAD Único - Linha 2 -->
       <div class="row mb-1">  
         <div class="col-md-4">
-          <label for="checkbox_fonteRenda_beneficiario" class="form-label fw-bold">FONTE(S) DE RENDA</label>
+          <label for="input_telefone_beneficiario" class="form-label fw-bold">NÚMERO DE TELEFONE</label>
         </div>                  
         <div class="col-md-4">
           <label for="input_rendaIdentificada_beneficiario" class="form-label fw-bold">RENDA IDENTIFICADA</label>
@@ -119,11 +119,10 @@
 
       <div class="row mb-4">  
 
-        <div class="col-md-4" id="checkbox_fonteRenda_beneficiario">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
-          <?!= gerarCheckBox( BUFFER_FONTES_DE_RENDA, "fonteRenda_beneficiario", 0 ); ?>
-        </div>            
+        <div class="col-md-2">
+          <input type="text" class="form-control text-center" id="input_telefone_beneficiario">
+        </div>                          
+        <div class="col-md-2"></div>
 
         <div class="col-md-2">
           <div class="input-group mb-3">
@@ -166,10 +165,10 @@
           <label for="select_orgaoEncaminhador" class="form-label fw-bold">ÓRGÃO ENCAMINHADOR</label>
         </div>
         <div class="col-md-4">
-          <label for="input_nomeTecnico" class="form-label fw-bold">NOME DO TÉCNICO RESPONÁVEL PELO ENCAMINHAMENTO</label>
+          <label for="input_nomeTecnico" class="form-label fw-bold">NOME DO TÉCNICO RESPONSÁVEL PELO ENCAMINHAMENTO</label>
         </div>              
         <div class="col-md-4">
-          <label for="input_emailTecnico" class="form-label fw-bold">E-MAIL DO TÉCNICO RESPONÁVEL PELO ENCAMINHAMENTO</label>
+          <label for="input_emailTecnico" class="form-label fw-bold">E-MAIL DO TÉCNICO RESPONSÁVEL PELO ENCAMINHAMENTO</label>
         </div>                                                              
       </div>    
   
@@ -335,7 +334,6 @@
       </div>        
      
 
-
       <!-- Dados beneficiário - Linha 6 -->             
       <div class="row mb-4">
         <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA É PCD?</p>
@@ -366,20 +364,9 @@
       </div>                  
       
 
-      <!-- Dados beneficiário - Linha 7 -->             
-      <div class="row mb-4">
-        <p class="fw-bold">DIAGNÓSTICO DE SOFRIMENTO MENTAL, USO PREJUDICIAL DE ÁLCOOL E DROGAS E/OU DEPENDENTES DE CUIDADOS PARA A VIDA DIÁRIA?</p>
-        <div id="radiobutton_diagnostico_beneficiario">
-          <!-- 1: Radio Button inline   -->
-          <!-- 0: Radio Button vertical -->
-          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "diagnostico_beneficiario", 0 ); ?>
-        </div>    
-      </div>
-      
-
       <!-- Dados beneficiário - Linha 8 -->             
       <div class="row mb-4">
-        <p class="fw-bold">MULHER EM GESTAÇÃO OU EM FASE DE PUERPÉRIO - ATÉ 6 MESES APÓS GESTAÇÃO?</p>
+        <p class="fw-bold">A BENEFICIÁRIA É MULHER EM GESTAÇÃO OU EM FASE DE PUERPÉRIO - ATÉ 6 MESES APÓS GESTAÇÃO?</p>
         <div id="radiobutton_gestacao_beneficiario">
           <!-- 1: Radio Button inline   -->
           <!-- 0: Radio Button vertical -->
@@ -414,8 +401,7 @@
             </button>
           </div>
         </div>
-
-      </div>                           
+      </div>
 
       
       <!-- Dados beneficiário - Linha 10 -->             
@@ -434,6 +420,35 @@
           <textarea class="form-control" id="textarea_descricao_trabalhoInformal_beneficiario" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
         </div>        
       </div>   
+
+      
+      <!-- Dados beneficiário - Linha 10 -->             
+      <div class="row mb-4">
+        <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA RECEBE ALGUM BENEFÍCIO?</p>
+        <div id="checkbox_beneficio_beneficiario" onchange="handlerCheckboxPaginaBM( 'beneficio_beneficiario', 'uploadArquivo_beneficio_beneficiario', '1', 'diferenca' )">
+          <!-- 1: checkbox inline   -->
+          <!-- 0: checkbox vertical -->
+          <?!= gerarCheckBox( BUFFER_BENEFICIO, "beneficio_beneficiario", 0 ); ?>
+        </div>    
+      </div>                     
+      
+      <div class="mb-5" id="uploadArquivo_beneficio_beneficiario" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-6">
+            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O BENEFÍCIO</p>           
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3 my-3">
+          <div class="input-group">
+            <input class="form-control" type="file" accept=".pdf" id="file4" name="file4" />
+            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+              style="cursor:pointer;">
+              <i class="bi bi-upload"></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
       
       <!-- Dados beneficiário - Linha 11 -->             
@@ -533,32 +548,115 @@
     </section>
 
 
-    <!-- Informações adicionais -->
-    <section id="informacoes_adicionais">    
+    <!-- Informações Família -->
+    <section id="informacoes_familia">    
 
       <br><hr><br>
 
-      <!-- Dados adicionais - Linha 1 -->
+      <!-- Dados família - Linha 1 -->             
+      <div class="row mb-4">
+        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, INCLUINDO O BENEFICIÁRIO (A) E DEMAIS FAMILIARES, HÁ ALGUÉM COM DIAGNÓSTICO DE SOFRIMENTO MENTAL, USO PREJUDICIAL DE ÁLCOOL E DROGAS E/OU DEPENDENTES DE CUIDADOS PARA A VIDA DIÁRIA?
+</p>
+        <div id="radiobutton_diagnostico_familia">
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
+          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "diagnostico_familia", 0 ); ?>
+        </div>    
+      </div>
+
+
+      <!-- Dados família - Linha 1 -->
       <div class="row mb-4">
         <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, HÁ INDIVÍDUOS EM SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS?</p>
-        <div id="checkbox_violenciasFamiliares_familia" onchange="handlerCheckboxPaginaBM( 'violenciasFamiliares', 'descricaoViolenciasFamiliares_familia', '1', 'diferenca' )">
+        <div id="checkbox_violencias_familia" onchange="handlerCheckboxPaginaBM( 'violencias_familia', 'descricaoViolencias_familia', '1', 'diferenca' )">
           <!-- 1: checkbox inline   -->
           <!-- 0: checkbox vertical -->
-          <?!= gerarCheckBox( BUFFER_VIOLENCIAS, "violenciasFamiliares", 0 ); ?>
+          <?!= gerarCheckBox( BUFFER_VIOLENCIAS, "violencias_familia", 0 ); ?>
         </div>    
       </div>    
 
-      <div class="row mb-4" id="descricaoViolenciasFamiliares_familia" style="display: none;">
+      <div class="row mb-4" id="descricaoViolencias_familia" style="display: none;">
         <div class="col-md-10">
-          <label for="textarea_descricaoViolenciasFamiliares_familia" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DA SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS</label>
-          <textarea class="form-control" id="textarea_descricaoViolenciasFamiliares_familia" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
+          <label for="textarea_descricaoViolencias_familia" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DA SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS</label>
+          <textarea class="form-control" id="textarea_descricaoViolencias_familia" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
         </div>        
       </div>   
 
 
-      <!-- Dados adicionais - Linha 2 -->
+      <!-- Dados família - Linha 8 -->             
       <div class="row mb-4">
-        <p class="fw-bold">O(A) BENEFICIÁRIO(A) OU ALGUÉM DA FAMÍLIA ESTÁ EM SITUAÇÃO DE PROSTITUIÇÃO?</p>
+        <p class="fw-bold">O RESPONSÁVEL FAMILIAR POSSUI ALGUMA CRIANÇA OU ADOLESCENTE COM MEDIDA PROTETIVA DE ACOLHIMENTO INSTITUCIONAL?</p>
+        <div id="radiobutton_ceaMedidaProtetiva_familia" onchange="mostrarCampo( 'ceaMedidaProtetiva_familia', 'uploadArquivo_ceaMedidaProtetiva_familia', '2', 'igualdade' )">
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
+          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaMedidaProtetiva_familia", 0 ); ?>
+        </div>    
+      </div>      
+
+      <div class="mb-5" id="uploadArquivo_ceaMedidaProtetiva_familia" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-12">
+            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE A MEDIDA PROTETIVA DE ACOLHIMENTO</p>           
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">            
+            <input class="form-control" type="file" id="bt_ceaMedidaProtetiva_familia">
+          </div>
+        </div>
+      </div>   
+
+
+      <!-- Dados família - Linha 8 -->             
+      <div class="row mb-4">
+        <p class="fw-bold">O RESPONSÁVEL FAMILIAR POSSUI ALGUMA CRIANÇA OU/E ADOLESCENTE TEMPORARIAMENTE PRIVADA DO SEU CONVÍVIO POR OUTROS MOTIVOS QUE NÃO A MEDIDA PROTETIVA DE ACOLHIMENTO INSTITUCIONAL?</p>
+        <div id="radiobutton_ceaConvivioPrivado_familia" onchange="mostrarCampo( 'ceaConvivioPrivado_familia', 'uploadArquivo_ceaConvivioPrivado_familia', '2', 'igualdade' )">
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
+          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaConvivioPrivado_familia", 0 ); ?>
+        </div>    
+      </div>      
+
+      <div class="mb-5" id="uploadArquivo_ceaConvivioPrivado_familia" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-12">
+            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE A SITUAÇÃO</p>           
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">            
+            <input class="form-control" type="file" id="bt_ceaConvivioPrivado_familia">
+          </div>
+        </div>
+      </div>   
+
+
+      <!-- Dados família - Linha 9 -->             
+      <div class="row mb-4">
+        <p class="fw-bold">O RESPONSÁVEL FAMILIAR POSSUI ALGUMA CRIANÇA OU ADOLESCENTE EM SITUAÇÃO DE TRABALHO INFANTIL E/OU EXPLORAÇÃO SEXUAL?</p>
+        <div id="radiobutton_ceaTrabalhoExploracao_familia" onchange="mostrarCampo( 'ceaTrabalhoExploracao_familia', 'uploadArquivo_ceaTrabalhoExploracao_familia', '2', 'igualdade' )">
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
+          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaTrabalhoExploracao_familia", 0 ); ?>
+        </div>    
+      </div>            
+      <div class="mb-5" id="uploadArquivo_ceaTrabalhoExploracao_familia" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-12">
+            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE A SITUAÇÃO DE TRABALHO INFANTIL E/OU EXPLORAÇÃO SEXUAL</p>           
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">            
+            <input class="form-control" type="file" id="bt_ceaTrabalhoExploracao_familia">
+          </div>
+        </div>
+      </div>                
+
+
+      <!-- Dados família - Linha 2 -->
+      <div class="row mb-4">
+        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, INCLUINDO O BENEFICIÁRIO (A) E DEMAIS FAMILIARES, HÁ ALGUÉM EM EM SITUAÇÃO DE PROSTITUIÇÃO?</p>
         <div id="radiobutton_prostituicaoFamiliares_familia">
           <!-- 1: Radio Button inline   -->
           <!-- 0: Radio Button vertical -->
@@ -567,7 +665,7 @@
       </div>                       
 
 
-      <!-- Dados adicionais - Linha 3 -->
+      <!-- Dados família - Linha 3 -->
       <div class="row mb-1">
         <div class="col-md-12">
           <p class="fw-bold">INFORMAÇÕES TÉCNICAS ADICIONAIS</p>           
@@ -580,7 +678,7 @@
       </div>      
       <div class="row mb-4">
         <div class="col-md-10">
-          <textarea class="form-control" id="textarea_informacoes_adicionais_beneficiario" rows="4" cols="50" maxlength="200" placeholder="Digite aqui o relato sucinto"></textarea>
+          <textarea class="form-control" id="textarea_informacoes_adicionais" rows="4" cols="50" maxlength="200" placeholder="Digite aqui o relato sucinto"></textarea>
         </div>        
       </div>   
 
@@ -614,11 +712,11 @@
 
 
     <!-- Termo de responsabilidade do técnico -->
-    <section id="termoResponsabilidadeTecnico" class="border rounded-2 mb-5 mt-2 p-4">    
+    <section id="termoResponsabilidadeServico" class="border rounded-2 mb-5 mt-2 p-4">    
 
       <div class="row mb-2">        
         <div class="col-md-12 fw-bold">          
-          TERMO DE RESPONSABILIDADE DO TÉCNICO
+          TERMO DE RESPONSABILIDADE DO SERVIÇO
         </div>
       </div>
 
@@ -629,42 +727,22 @@
       </div>  
       <div class="row mb-2">
         <div class="col-md-12">          
-          Este equipamento assume o compromisso de acompanhar a inserção da pessoa/família inscrita, promovendo o acompanhamento social necessário para apoiar o seu acesso ao Programa.
-        </div>  
-      </div>  
-      <div class="row mb-3">
-        <div class="col-md-12">          
-          O acompanhamento compreenderá, entre outras ações, instrução ao beneficiário sobre as etapas de acesso e permanência do Programa Bolsa Moradia, que são:
+          Este equipamento assume o compromisso de acompanhar a inserção da pessoa/família inscrita, promovendo o acompanhamento social necessário para apoiar o seu acesso ao Programa, compreendendo as seguintes ações:
         </div>  
       </div>  
       <div class="row mb-2">
         <div class="col-md-12">          
-          - Apresentação de documentação de cadastro à Urbel;
+          - Indicação do usuário ao programa e envio da documentação comprobatória;
         </div>  
       </div>  
       <div class="row mb-2">
         <div class="col-md-12">          
-          - Indicação de imóvel para agendamento de vistoria a ser realizada pela Urbel;
+          - Orientação do usuário sobre os prazos, responsabilidades e etapas do Bolsa Moradia;
         </div>  
       </div>  
       <div class="row mb-2">
         <div class="col-md-12">          
-          - Acompanhamento dos resultados da vistoria;
-        </div>  
-      </div>
-      <div class="row mb-2">
-        <div class="col-md-12">          
-          - Apresentação do contrato de aluguel à Urbel;
-        </div>  
-      </div>  
-      <div class="row mb-3">
-        <div class="col-md-12">          
-          - Apresentação dos recibos de pagamento do aluguel mensalmente à Urbel.
-        </div>  
-      </div>
-      <div class="row mb-2">
-        <div class="col-md-12">          
-          O acompanhamento também envolve o apoio na comunicação com o beneficiário(a) a respeito dos prazos a serem cumpridos para concluir o acesso ao benefício, e que sua não conclusão em até 6 meses levará à exclusão da habilitação do beneficiário.
+          - Apoio na comunicação com a Urbel e/ou com a DPOP, quando necessário;
         </div>  
       </div>
       <div class="row mb-3">
@@ -675,8 +753,8 @@
 
       <div class="row justify-content-md-center">            
         <div class="col-md-2">
-          <input class="form-check-input border border-secondary rounded-1 me-1" type="checkbox" value="1" id="checkbox_termoResponsabilidadeTecnico">
-          <label class="form-check-label fw-bold" for="checkbox_termoResponsabilidadeTecnico">De acordo</label>        
+          <input class="form-check-input border border-secondary rounded-1 me-1" type="checkbox" value="1" id="checkbox_termoResponsabilidadeServico">
+          <label class="form-check-label fw-bold" for="checkbox_termoResponsabilidadeServico">De acordo</label>        
         </div>      
       </div>              
 
