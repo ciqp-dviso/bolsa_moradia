@@ -49,8 +49,8 @@
         do formulário.
       </div>
 
-      <div class="row">
-        <div class="col-auto">
+      <div class="row mb-5">
+        <div class="col-md-5">
           <div class="input-group">
             <input class="form-control form-control-sm" type="file" accept=".pdf" id="file1" name="file1" />
             <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)" style="cursor:pointer;">
@@ -110,7 +110,7 @@
           <label for="input_telefone_beneficiario" class="form-label fw-bold">NÚMERO DE TELEFONE</label>
         </div>                  
         <div class="col-md-4">
-          <label for="input_rendaIdentificada_beneficiario" class="form-label fw-bold">RENDA IDENTIFICADA</label>
+          <label for="input_renda_familia" class="form-label fw-bold">RENDA FAMILIAR MENSAL</label>
         </div>          
         <div class="col-md-4">
           <label for="input_numeroDeFamiliares_beneficiario" class="form-label fw-bold">QUANTIDADE DE MEMBROS NA FAMÍLIA</label>
@@ -127,7 +127,7 @@
         <div class="col-md-2">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">R$</span>
-            <input type="text" class="form-control" id="input_rendaIdentificada_beneficiario" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" id="input_renda_familia" aria-describedby="basic-addon1">
             <span class="input-group-text">,00</span>
           </div>
         </div>          
@@ -209,7 +209,7 @@
         </div>                        
       </div>    
   
-      <div class="row mb-4">            
+      <div class="row mb-5">            
         <div class="col-md-5">
           <input type="text" class="form-control" id="input_nome_beneficiario">
         </div>              
@@ -223,92 +223,74 @@
 
       <!-- Dados beneficiário - Linha 2 -->       
       <div class="row mb-1"> 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="input_dataNascimento_beneficiario" class="form-label fw-bold">DATA DE NASCIMENTO</label>
         </div>              
-        <div class="col-md-4">
-          <label for="select_escolaridade_beneficiario" class="form-label fw-bold">ESCOLARIDADE</label>          
-        </div>              
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="select_racaCor_beneficiario" class="form-label fw-bold">RAÇA/COR</label>
-        </div>                
+        </div>                   
+        <div class="col-md-5">
+          <label for="input_nomeMae_beneficiario" class="form-label fw-bold">NOME COMPLETO DA MÃE</label>
+        </div>              
+        <div class="col-md-1"></div>
       </div>    
   
-      <div class="row mb-4">            
+      <div class="row mb-5">            
         <div class="col-md-2">
           <input type="date" class="form-control" id="input_dataNascimento_beneficiario">
         </div>              
-        <div class="col-md-2"></div>
-
-        <div class="col-md-3">
-          <select class="form-select" id="select_escolaridade_beneficiario">
-            <?!= gerarSelect( BUFFER_ESCOLARIDADE ); ?>
-          </select>
-        </div>                      
         <div class="col-md-1"></div>
 
         <div class="col-md-2">
           <select class="form-select" id="select_racaCor_beneficiario">
             <?!= gerarSelect( BUFFER_RACAS_CORES ); ?>
           </select>
-        </div>                      
-        <div class="col-md-2"></div>
+        </div>                
+        <div class="col-md-1"></div>      
+
+        <div class="col-md-5">
+          <input type="text" class="form-control" id="input_nomeMae_beneficiario">
+        </div>              
+        <div class="col-md-1"></div>
       </div>             
 
 
       <!-- Dados beneficiário - Linha 3 -->       
       <div class="row mb-1">       
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="select_genero_beneficiario" class="form-label fw-bold">GÊNERO AUTODECLARADO</label>
         </div>              
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="select_orientacaoSexual_beneficiario" class="form-label fw-bold">ORIENTAÇÃO SEXUAL</label>
         </div>                
         <div class="col-md-4">
-          <label for="input_rendaFamiliar_beneficiario" class="form-label fw-bold">RENDA FAMILIAR MENSAL</label>
+          <label for="select_escolaridade_beneficiario" class="form-label fw-bold">ESCOLARIDADE</label>          
         </div>              
+        <div class="col-md-2"></div>                  
       </div>      
 
-      <div class="row mb-4">          
+      <div class="row mb-5">          
         <div class="col-md-2">
           <select class="form-select" id="select_genero_beneficiario">
             <?!= gerarSelect( BUFFER_IDENTIDADES_DE_GENERO ); ?>
           </select>
         </div>              
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
 
         <div class="col-md-2">
           <select class="form-select" id="select_orientacaoSexual_beneficiario">
             <?!= gerarSelect( BUFFER_ORIENTACOES_SEXUAIS ); ?>
           </select>
         </div>              
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
 
-        <div class="col-md-2">
-          <div class="input-group">
-            <span class="input-group-text" id="basic-addon2">R$</span>
-            <input type="text" class="form-control" id="input_rendaFamiliar_beneficiario" aria-describedby="basic-addon2">
-            <span class="input-group-text">,00</span>
-          </div>
-        </div>        
-        <div class="col-md-2"></div>
-      </div>
-      
-
-      <!-- Dados beneficiário - Linha 4 -->
-      <div class="row mb-1">       
-        <div class="col-md-5">
-          <label for="input_nomeMae_beneficiario" class="form-label fw-bold">NOME COMPLETO DA MÃE</label>
-        </div>      
-        <div class="col-md-7"></div>
-      </div>    
-  
-      <div class="row mb-5">            
-        <div class="col-md-5">
-          <input type="text" class="form-control" id="input_nomeMae_beneficiario">
-        </div>              
-        <div class="col-md-7"></div>
-      </div>       
+        <div class="col-md-3">
+          <select class="form-select" id="select_escolaridade_beneficiario">
+            <?!= gerarSelect( BUFFER_ESCOLARIDADE ); ?>
+          </select>
+        </div>                      
+        <div class="col-md-3"></div>        
+      </div>      
 
 
       <!-- Dados beneficiário - Linha 5 -->
@@ -317,20 +299,23 @@
           <p class="fw-bold">INSIRA O DOCUMENTO COM FOTO QUE APRESENTE O NÚMERO DO CPF DO BENEFICIÁRIO/BENEFICIÁRIA</p>           
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row mb-3">
         <div class="col-md-12">
           <p>Caso o usuário não esteja com a documentação regularizada, ele deverá estar ciente de que, após a convocação, deverá apresentá-la obrigatoriamente no ato do cadastro na Urbel. </p>           
         </div>
       </div>    
         
-      <div class="col-md-4 mt-3 mb-4">
-        <div class="input-group">
-          <input class="form-control" type="file" accept=".pdf" id="file2" name="file2" />
-          <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
-            style="cursor:pointer;">
-            <i class="bi bi-upload"></i>
-          </button>
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <div class="input-group">
+            <input class="form-control" type="file" accept=".pdf" id="file2" name="file2" />
+            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+              style="cursor:pointer;">
+              <i class="bi bi-upload"></i>
+            </button>
+          </div>          
         </div>
+        <div class="col-md-8"></div>
       </div>        
      
 
@@ -344,24 +329,57 @@
         </div>    
       </div>    
 
-      <div class="mb-5" id="uploadArquivo_pcd_beneficiario" style="display: none;">
+      <div id="uploadArquivo_pcd_beneficiario" style="display: none;">
         <div class="row mb-1">
           <div class="col-md-12">
             <p class="fw-bold">INSIRA A DOCUMENTAÇÃO PCD</p>           
           </div>
         </div>
 
-        <div class="col-md-4 mb-3 my-3">
-          <div class="input-group">
-            <input class="form-control" type="file" accept=".pdf" id="file3" name="file3" />
-            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
-              style="cursor:pointer;">
-              <i class="bi bi-upload"></i>
-            </button>
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group ">
+              <input class="form-control" type="file" accept=".pdf" id="file3" name="file3" />
+              <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
           </div>
         </div>  
+      </div>    
 
-      </div>                  
+
+      <!-- Dados beneficiário - Linha 13 -->             
+      <div class="row mb-4">
+        <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA APRESENTA PROBLEMAS DE SAÚDE?</p>
+
+        <div id="checkbox_problemasSaude_beneficiario" onchange="mostrarCampo( 'problemasSaude_beneficiario', 'uploadArquivo_problemasSaude_beneficiario', '1', 'diferenca' )">
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
+          <?!= gerarRadioButton( BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE, "problemasSaude_beneficiario", 0 ); ?>
+        </div>    
+      </div>      
+
+      <div id="uploadArquivo_problemasSaude_beneficiario" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-12">
+            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O PROBLEMA DE SAÚDE</p>           
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" id="file6" name="file6" />
+              <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>            
       
 
       <!-- Dados beneficiário - Linha 8 -->             
@@ -385,20 +403,22 @@
         </div>    
       </div>                     
       
-      <div class="mb-5" id="uploadArquivo_trabalhoFormal_beneficiario" style="display: none;">
+      <div id="uploadArquivo_trabalhoFormal_beneficiario" style="display: none;">
         <div class="row mb-1">
           <div class="col-md-6">
             <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O TRABALHO FORMAL</p>           
           </div>
         </div>
 
-        <div class="col-md-4 mb-3 my-3">
-          <div class="input-group">
-            <input class="form-control" type="file" accept=".pdf" id="file4" name="file4" />
-            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
-              style="cursor:pointer;">
-              <i class="bi bi-upload"></i>
-            </button>
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" id="file4" name="file4" />
+              <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -407,19 +427,32 @@
       <!-- Dados beneficiário - Linha 10 -->             
       <div class="row mb-4">
         <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA ESTÁ VINCULADO(A) AO TRABALHO INFORMAL, GRUPOS PRODUTIVOS, ASSOCIAÇÕES E COOPERATIVAS?</p>
-        <div id="checkbox_trabalhoInformal_beneficiario" onchange="handlerCheckboxPaginaBM( 'trabalhoInformal_beneficiario', 'descricao_trabalhoInformal_beneficiario', '1', 'diferenca' )">
+        <div id="checkbox_trabalhoInformal_beneficiario" onchange="handlerCheckboxPaginaBM( 'trabalhoInformal_beneficiario', 'uploadArquivo_trabalhoInformal_beneficiario', '1', 'diferenca' )">
           <!-- 1: checkbox inline   -->
           <!-- 0: checkbox vertical -->
           <?!= gerarCheckBox( BUFFER_TIPOS_DE_TRABALHO, "trabalhoInformal_beneficiario", 0 ); ?>
         </div>    
-      </div>                     
+      </div>                    
       
-      <div class="row mb-5" id="descricao_trabalhoInformal_beneficiario" style="display: none;">
-        <div class="col-md-10">
-          <label for="textarea_descricao_trabalhoInformal_beneficiario" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DO TRABALHO</label>
-          <textarea class="form-control" id="textarea_descricao_trabalhoInformal_beneficiario" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
-        </div>        
-      </div>   
+      <div id="uploadArquivo_trabalhoInformal_beneficiario" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-6">
+            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O TRABALHO</p>           
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" />
+              <button class="input-group-text bg-primary text-white"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>      
 
       
       <!-- Dados beneficiário - Linha 10 -->             
@@ -432,20 +465,22 @@
         </div>    
       </div>                     
       
-      <div class="mb-5" id="uploadArquivo_beneficio_beneficiario" style="display: none;">
+      <div id="uploadArquivo_beneficio_beneficiario" style="display: none;">
         <div class="row mb-1">
           <div class="col-md-6">
             <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O BENEFÍCIO</p>           
           </div>
         </div>
 
-        <div class="col-md-4 mb-3 my-3">
-          <div class="input-group">
-            <input class="form-control" type="file" accept=".pdf" id="file4" name="file4" />
-            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
-              style="cursor:pointer;">
-              <i class="bi bi-upload"></i>
-            </button>
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" id="file4" name="file4" />
+              <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -461,65 +496,36 @@
         </div>    
       </div>            
       
-      <div class="mb-5" id="uploadArquivo_estamosJuntos_beneficiario" style="display: none;">
+      <div id="uploadArquivo_estamosJuntos_beneficiario" style="display: none;">
         <div class="row mb-1">
           <div class="col-md-12">
             <p class="fw-bold">INSIRA A DECLARAÇÃO DA SUTE (Subsecretaria de Trabalho e Emprego) SOBRE A PARTICIPAÇÃO NO PROGRAMA ESTAMOS JUNTOS</p>           
           </div>
         </div>
 
-        <div class="col-md-4 mb-3 my-3">
-          <div class="input-group">
-            <input class="form-control" type="file" accept=".pdf" id="file5" name="file5" />
-            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
-              style="cursor:pointer;">
-              <i class="bi bi-upload"></i>
-            </button>
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" id="file5" name="file5" />
+              <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
           </div>
         </div> 
-
-      </div>                           
+      </div>   
 
                         
       <!-- Dados beneficiário - Linha 12 -->             
       <div class="row mb-4">
-        <p class="fw-bold">A PESSOA CANDIDATA TEM HISTÓRICO DE INSTITUCIONALIZAÇÃO?</p>
+        <p class="fw-bold">O BENEFICIÁRIO/BENEFICIÁRIA TEM HISTÓRICO DE INSTITUCIONALIZAÇÃO?</p>
         <div id="checkbox_institucionalizacao_beneficiario" onchange="bloquearOpcoesCheckbox( 'institucionalizacao_beneficiario', '1' )">
           <!-- 1: checkbox inline   -->
           <!-- 0: checkbox vertical -->
           <?!= gerarCheckBox( BUFFER_HISTORICO_INSTITUCIONALIZACAO, "institucionalizacao_beneficiario", 0 ); ?>
         </div>    
-      </div>      
-
-
-      <!-- Dados beneficiário - Linha 13 -->             
-      <div class="row mb-4">
-        <p class="fw-bold">A PESSOA CANDIDATA AO BENEFÍCIO POSSUI ALGUMA DAS CONDIÇÕES DE SAÚDE LISTADAS ABAIXO?</p>
-        <div id="checkbox_saude_beneficiario"  onchange="handlerCheckboxPaginaBM( 'saude_beneficiario', 'uploadArquivo_saude_beneficiario', '1', 'diferenca' )">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
-          <?!= gerarCheckBox( BUFFER_CONDICOES_SAUDE, "saude_beneficiario", 0 ); ?>
-        </div>    
-      </div>      
-
-      <div class="mb-5" id="uploadArquivo_saude_beneficiario" style="display: none;">
-        <div class="row mb-1">
-          <div class="col-md-12">
-            <p class="fw-bold">INSIRA A DOCUMENTAÇÃO SOBRE AS CONDIÇÕES DE SAÚDE</p>           
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-3 my-3">
-          <div class="input-group">
-            <input class="form-control" type="file" accept=".pdf" id="file6" name="file6" />
-            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
-              style="cursor:pointer;">
-              <i class="bi bi-upload"></i>
-            </button>
-          </div>
-        </div>
-
-      </div>                  
+      </div>            
 
 
       <br><hr><br>
@@ -557,17 +563,37 @@
       <div class="row mb-4">
         <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, INCLUINDO O BENEFICIÁRIO (A) E DEMAIS FAMILIARES, HÁ ALGUÉM COM DIAGNÓSTICO DE SOFRIMENTO MENTAL, USO PREJUDICIAL DE ÁLCOOL E DROGAS E/OU DEPENDENTES DE CUIDADOS PARA A VIDA DIÁRIA?
 </p>
-        <div id="radiobutton_diagnostico_familia">
+        <div id="radiobutton_diagnostico_familia" onchange="mostrarCampo( 'diagnostico_familia', 'uploadArquivo_diagnostico_familia', '2', 'igualdade' )">
           <!-- 1: Radio Button inline   -->
           <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "diagnostico_familia", 0 ); ?>
         </div>    
       </div>
 
+      <div id="uploadArquivo_diagnostico_familia" style="display: none;">
+        <div class="row mb-1">
+          <div class="col-md-6">
+            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O DIAGNÓSTICO</p>           
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" />
+              <button class="input-group-text bg-primary text-white"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>        
+
 
       <!-- Dados família - Linha 1 -->
       <div class="row mb-4">
-        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, HÁ INDIVÍDUOS EM SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS?</p>
+        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, INCLUINDO O BENEFICIÁRIO (A) E DEMAIS FAMILIARES, HÁ INDIVÍDUOS EM SITUAÇÃO DE AMEAÇA, CONFLITO TERRITORIAL OU OUTRAS VIOLÊNCIAS?</p>
         <div id="checkbox_violencias_familia" onchange="handlerCheckboxPaginaBM( 'violencias_familia', 'descricaoViolencias_familia', '1', 'diferenca' )">
           <!-- 1: checkbox inline   -->
           <!-- 0: checkbox vertical -->
@@ -583,6 +609,17 @@
       </div>   
 
 
+      <!-- Dados família - Linha 2 -->
+      <div class="row mb-4">
+        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, INCLUINDO O BENEFICIÁRIO (A) E DEMAIS FAMILIARES, HÁ ALGUÉM EM EM SITUAÇÃO DE PROSTITUIÇÃO?</p>
+        <div id="radiobutton_prostituicaoFamiliares_familia">
+          <!-- 1: Radio Button inline   -->
+          <!-- 0: Radio Button vertical -->
+          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "prostituicaoFamiliares_familia", 0 ); ?>
+        </div>    
+      </div>      
+
+
       <!-- Dados família - Linha 8 -->             
       <div class="row mb-4">
         <p class="fw-bold">O RESPONSÁVEL FAMILIAR POSSUI ALGUMA CRIANÇA OU ADOLESCENTE COM MEDIDA PROTETIVA DE ACOLHIMENTO INSTITUCIONAL?</p>
@@ -593,18 +630,25 @@
         </div>    
       </div>      
 
-      <div class="mb-5" id="uploadArquivo_ceaMedidaProtetiva_familia" style="display: none;">
+      <div id="uploadArquivo_ceaMedidaProtetiva_familia" style="display: none;">
         <div class="row mb-1">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE A MEDIDA PROTETIVA DE ACOLHIMENTO</p>           
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5">            
-            <input class="form-control" type="file" id="bt_ceaMedidaProtetiva_familia">
+
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" />
+              <button class="input-group-text bg-primary text-white"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>   
+      </div>    
 
 
       <!-- Dados família - Linha 8 -->             
@@ -615,20 +659,27 @@
           <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaConvivioPrivado_familia", 0 ); ?>
         </div>    
-      </div>      
+      </div>    
 
-      <div class="mb-5" id="uploadArquivo_ceaConvivioPrivado_familia" style="display: none;">
+      <div id="uploadArquivo_ceaConvivioPrivado_familia" style="display: none;">
         <div class="row mb-1">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE A SITUAÇÃO</p>           
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5">            
-            <input class="form-control" type="file" id="bt_ceaConvivioPrivado_familia">
+
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" />
+              <button class="input-group-text bg-primary text-white"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>   
+      </div>  
 
 
       <!-- Dados família - Linha 9 -->             
@@ -639,30 +690,27 @@
           <!-- 0: Radio Button vertical -->
           <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "ceaTrabalhoExploracao_familia", 0 ); ?>
         </div>    
-      </div>            
-      <div class="mb-5" id="uploadArquivo_ceaTrabalhoExploracao_familia" style="display: none;">
+      </div>   
+
+      <div id="uploadArquivo_ceaTrabalhoExploracao_familia" style="display: none;">
         <div class="row mb-1">
           <div class="col-md-12">
             <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE A SITUAÇÃO DE TRABALHO INFANTIL E/OU EXPLORAÇÃO SEXUAL</p>           
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5">            
-            <input class="form-control" type="file" id="bt_ceaTrabalhoExploracao_familia">
+
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" type="file" accept=".pdf" />
+              <button class="input-group-text bg-primary text-white"
+                style="cursor:pointer;">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>                
-
-
-      <!-- Dados família - Linha 2 -->
-      <div class="row mb-4">
-        <p class="fw-bold">NA COMPOSIÇÃO FAMILIAR, INCLUINDO O BENEFICIÁRIO (A) E DEMAIS FAMILIARES, HÁ ALGUÉM EM EM SITUAÇÃO DE PROSTITUIÇÃO?</p>
-        <div id="radiobutton_prostituicaoFamiliares_familia">
-          <!-- 1: Radio Button inline   -->
-          <!-- 0: Radio Button vertical -->
-          <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "prostituicaoFamiliares_familia", 0 ); ?>
-        </div>    
-      </div>                       
+      </div>                          
 
 
       <!-- Dados família - Linha 3 -->
@@ -690,13 +738,14 @@
 
       <br><hr><br>
 
-      <div class="row mb-2">        
+      <div class="row mb-3">        
         <div class="col-md-12 fw-bold">          
-          DOCUMENTO COM ASSINATURA DO USUÁRIO
+          TERMO DE ESCLARECIMENTO E CONSENTIMENTO DO USUÁRIO PROGRAMA BOLSA MORADIA
         </div>
       </div>
 
-        <div class="col-md-4 mb-3 my-3">
+      <div class="row mb-3">
+        <div class="col-md-4">
           <div class="input-group">
             <input class="form-control" type="file" accept=".pdf" id="file7" name="file7" />
             <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
@@ -705,6 +754,7 @@
             </button>
           </div>
         </div>       
+      </div>
       
       <br><hr><br>
              
@@ -714,7 +764,7 @@
     <!-- Termo de responsabilidade do técnico -->
     <section id="termoResponsabilidadeServico" class="border rounded-2 mb-5 mt-2 p-4">    
 
-      <div class="row mb-2">        
+      <div class="row mb-3">        
         <div class="col-md-12 fw-bold">          
           TERMO DE RESPONSABILIDADE DO SERVIÇO
         </div>

@@ -314,17 +314,26 @@
           
 
           <!-- Dados familiar - Linha 3 -->                    
-          <div class="row mb-1">
-            <div class="col-md-12">
-              <p class="fw-bold">INSIRA O DOCUMENTO COM FOTO</p>           
+          <div id="uploadArquivo_doc_familiar_${idFamiliar}">
+            <div class="row mb-1">
+              <div class="col-md-6">
+                <p class="fw-bold">INSIRA O DOCUMENTO COM FOTO</p>           
+              </div>
             </div>
-          </div>
-          <div class="row mb-5">
-            <div class="col-md-5">            
-              <input class="form-control" type="file" id="bt_uploadArquivo_doc_familiar_${idFamiliar}">
+    
+            <div class="row mb-5">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input class="form-control" type="file" accept=".pdf" />
+                  <button class="input-group-text bg-primary text-white"
+                    style="cursor:pointer;">
+                    <i class="bi bi-upload"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>           
-
+          </div>                                    
+          
           
           <!-- Dados familiar - Linha 4 -->             
           <div class="row mb-4">
@@ -335,21 +344,29 @@
               <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "pcd_familiar_${idFamiliar}", 0 ); ?>
             </div>    
           </div>            
-    
-          <div class="mb-5" id="uploadArquivo_pcd_familiar_${idFamiliar}" style="display: none;">
+
+          <div id="uploadArquivo_pcd_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <p class="fw-bold">INSIRA A DOCUMENTAÇÃO PCD</p>           
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_uploadArquivo_pcd_familiar_${idFamiliar}">
+    
+            <div class="row mb-5">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input class="form-control" type="file" accept=".pdf" />
+                  <button class="input-group-text bg-primary text-white"
+                    style="cursor:pointer;">
+                    <i class="bi bi-upload"></i>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>                           
+          </div>                                  
 
 
+          <!-- Dados familiar - Linha 4 -->   
           <div class="row mb-4">
             <p class="fw-bold">ESSE FAMILIAR APRESENTA PROBLEMAS DE SAÚDE?</p>
             <div id="radiobutton_problemasSaude_familiar_${idFamiliar}" onchange="mostrarCampo( 'problemasSaude_familiar_${idFamiliar}', 'uploadArquivo_problemasSaude_familiar_${idFamiliar}', '1', 'diferenca' )">
@@ -357,20 +374,27 @@
               <!-- 0: Radio Button vertical -->
               <?!= gerarRadioButton( BUFFER_QUANTIDADE_PROBLEMAS_DE_SAUDE, "problemasSaude_familiar_${idFamiliar}", 0 ); ?>
             </div>    
-          </div>
-          
-          <div class="mb-5" id="uploadArquivo_problemasSaude_familiar_${idFamiliar}" style="display: none;">
+          </div>          
+
+          <div id="uploadArquivo_problemasSaude_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-6">
                 <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O PROBLEMA DE SAÚDE</p>           
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_problemasSaude_familiar_${idFamiliar}">
+    
+            <div class="row mb-5">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input class="form-control" type="file" accept=".pdf" />
+                  <button class="input-group-text bg-primary text-white"
+                    style="cursor:pointer;">
+                    <i class="bi bi-upload"></i>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </div> 
           
     
           <!-- Dados familiar - Linha 7 -->             
@@ -392,67 +416,89 @@
               <!-- 0: Radio Button vertical -->
               <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "trabalhoFormal_familiar_${idFamiliar}", 0 ); ?>
             </div>    
-          </div>                     
+          </div>                 
           
-          <div class="mb-5" id="uploadArquivo_trabalhoFormal_familiar_${idFamiliar}" style="display: none;">
+          <div id="uploadArquivo_trabalhoFormal_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-6">
                 <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O TRABALHO FORMAL</p>           
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_uploadArquivo_trabalhoFormal_familiar_${idFamiliar}">
+    
+            <div class="row mb-5">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input class="form-control" type="file" accept=".pdf" />
+                  <button class="input-group-text bg-primary text-white"
+                    style="cursor:pointer;">
+                    <i class="bi bi-upload"></i>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>                           
-    
+          </div>           
+          
           
           <!-- Dados familiar - Linha 11 -->             
           <div class="row mb-4">
             <p class="fw-bold">ESSE FAMILIAR ESTÁ VINCULADO(A) AO TRABALHO INFORMAL, GRUPOS PRODUTIVOS, ASSOCIAÇÕES E COOPERATIVAS?</p>
-            <div id="checkbox_trabalhoInformal_familiar_${idFamiliar}" onchange="handlerCheckboxPaginaBM( 'trabalhoInformal_familiar_${idFamiliar}', 'descricao_trabalhoInformal_familiar_${idFamiliar}', '1', 'diferenca' )">
+            <div id="checkbox_trabalhoInformal_familiar_${idFamiliar}" onchange="handlerCheckboxPaginaBM( 'trabalhoInformal_familiar_${idFamiliar}', 'uploadArquivo_trabalhoInformal_familiar_${idFamiliar}', '1', 'diferenca' )">
               <!-- 1: checkbox inline   -->
               <!-- 0: checkbox vertical -->
               <?!= gerarCheckBox( BUFFER_TIPOS_DE_TRABALHO, "trabalhoInformal_familiar_${idFamiliar}", 0 ); ?>
             </div>    
+          </div>                 
+      
+          <div id="uploadArquivo_trabalhoInformal_familiar_${idFamiliar}" style="display: none;">
+            <div class="row mb-1">
+              <div class="col-md-6">
+                <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O TRABALHO</p>           
+              </div>
+            </div>
+    
+            <div class="row mb-5">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input class="form-control" type="file" accept=".pdf" />
+                  <button class="input-group-text bg-primary text-white"
+                    style="cursor:pointer;">
+                    <i class="bi bi-upload"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>      
+
+      
+          <!-- Dados beneficiário - Linha 10 -->             
+          <div class="row mb-4">
+            <p class="fw-bold">ESSE FAMILIAR RECEBE ALGUM BENEFÍCIO?</p>
+            <div id="checkbox_beneficio_familiar_${idFamiliar}" onchange="handlerCheckboxPaginaBM( 'beneficio_familiar_${idFamiliar}', 'uploadArquivo_beneficio_familiar_${idFamiliar}', '1', 'diferenca' )">
+              <!-- 1: checkbox inline   -->
+              <!-- 0: checkbox vertical -->
+              <?!= gerarCheckBox( BUFFER_BENEFICIO, "beneficio_familiar_${idFamiliar}", 0 ); ?>
+            </div>    
           </div>                     
           
-          <div class="row mb-5" id="descricao_trabalhoInformal_familiar_${idFamiliar}" style="display: none;">
-            <div class="col-md-10">
-              <label for="textarea_descricao_trabalhoInformal_familiar_${idFamiliar}" class="form-label fw-bold mb-1">FAÇA UMA BREVE DESCRIÇÃO DO TRABALHO</label>
-              <textarea class="form-control" id="textarea_descricao_trabalhoInformal_familiar_${idFamiliar}" rows="4" cols="50" maxlength="200" placeholder="Digite aqui a breve descrição"></textarea>
-            </div>        
-          </div>   
-
-      
-      <!-- Dados beneficiário - Linha 10 -->             
-      <div class="row mb-4">
-        <p class="fw-bold">ESSE FAMILIAR RECEBE ALGUM BENEFÍCIO?</p>
-        <div id="checkbox_beneficio_familiar_${idFamiliar}" onchange="handlerCheckboxPaginaBM( 'beneficio_familiar_${idFamiliar}', 'uploadArquivo_beneficio_familiar_${idFamiliar}', '1', 'diferenca' )">
-          <!-- 1: checkbox inline   -->
-          <!-- 0: checkbox vertical -->
-          <?!= gerarCheckBox( BUFFER_BENEFICIO, "beneficio_familiar_${idFamiliar}", 0 ); ?>
-        </div>    
-      </div>                     
-      
-      <div class="mb-5" id="uploadArquivo_beneficio_familiar_${idFamiliar}" style="display: none;">
-        <div class="row mb-1">
-          <div class="col-md-6">
-            <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O BENEFÍCIO</p>           
+          <div id="uploadArquivo_beneficio_familiar_${idFamiliar}" style="display: none;">
+            <div class="row mb-1">
+              <div class="col-md-6">
+                <p class="fw-bold">INSIRA O DOCUMENTO QUE COMPROVE O BENEFÍCIO</p>           
+              </div>
+            </div>
+    
+            <div  class="row mb-5">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input class="form-control" type="file" accept=".pdf" id="file4" name="file4" />
+                  <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
+                    style="cursor:pointer;">
+                    <i class="bi bi-upload"></i>
+                  </button>
+                </div>
+              </div>              
+            </div>
           </div>
-        </div>
-
-        <div class="col-md-4 mb-3 my-3">
-          <div class="input-group">
-            <input class="form-control" type="file" accept=".pdf" id="file4" name="file4" />
-            <button class="input-group-text bg-primary text-white" onclick="importarArquivo(this)"
-              style="cursor:pointer;">
-              <i class="bi bi-upload"></i>
-            </button>
-          </div>
-        </div>
-      </div>
     
             
           <!-- Dados familiar - Linha 12  -->     
@@ -463,20 +509,27 @@
               <!-- 0: Radio Button vertical -->
               <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "estamosJuntos_familiar_${idFamiliar}", 0 ); ?>
             </div>    
-          </div>      
-            
-          <div class="mb-5" id="uploadArquivo_estamosJuntos_familiar_${idFamiliar}" style="display: none;">
+          </div>                  
+
+          <div id="uploadArquivo_estamosJuntos_familiar_${idFamiliar}" style="display: none;">
             <div class="row mb-1">
               <div class="col-md-12">
                 <p class="fw-bold">INSIRA A DECLARAÇÃO DA SUTE (Subsecretaria de Trabalho e Emprego) SOBRE A PARTICIPAÇÃO NO PROGRAMA ESTAMOS JUNTOS</p>           
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-5">            
-                <input class="form-control" type="file" id="bt_uploadArquivo_estamosJuntos_familiar_${idFamiliar}">
+    
+            <div class="row mb-5">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input class="form-control" type="file" accept=".pdf" />
+                  <button class="input-group-text bg-primary text-white"
+                    style="cursor:pointer;">
+                    <i class="bi bi-upload"></i>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>            
+          </div>           
 
           <!-- Familiar ${idFamiliar} - Fim -->    
 
